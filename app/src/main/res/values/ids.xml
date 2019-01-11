@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="back" type="id" />
+    <item name="viewPager" type="id" />
+    <item name="recyclerView" type="id" />
+    <item name="banner" type="id" />
+    <item name="toolbar" type="id" />
+    <item name="tvActTitle" type="id" />
+    <item name="tvActRightTitle" type="id" />
+    <item name="ivActImg" type="id" />
+    <item name="swipeRefresh" type="id" />
+    <item name="ivToolbarRight" type="id" />
+    <item name="tvEmpty" type="id" />
+</resources>

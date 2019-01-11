@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbarHeight"
+    android:elevation="@dimen/elevation"
+    app:layout_collapseMode="pin"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <TextView
+        android:id="@id/tvActTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="首页"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/titleSize" />
+
+    <ImageView
+        android:id="@id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:src="@drawable/ic_close"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@id/tvActRightTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:paddingBottom="@dimen/titleRightTopBottom"
+        android:paddingLeft="@dimen/titleRightLeftRight"
+        android:paddingRight="@dimen/titleRightLeftRight"
+        android:paddingTop="@dimen/titleRightTopBottom"
+        android:text="保存"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/titleRightSize"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@id/ivToolbarRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:paddingBottom="@dimen/titleRightTopBottom"
+        android:paddingLeft="@dimen/titleRightLeftRight"
+        android:paddingRight="@dimen/titleRightLeftRight"
+        android:paddingTop="@dimen/titleRightTopBottom"
+        android:src="@drawable/ic_menu"
+        android:visibility="gone" />
+
+</android.support.v7.widget.Toolbar>
