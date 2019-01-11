@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -139,8 +138,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onDestroy();
         if (presenter != null)
             presenter.destroy();
-        if (!TextUtils.equals("SplashActivity", getClass().getSimpleName()))
-            ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
+        ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
     }
 
     @Override

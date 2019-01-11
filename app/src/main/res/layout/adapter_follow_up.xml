@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivAdapterFollowUpPic"
+        android:layout_width="150dp"
+        android:layout_height="90dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_follow_up_placeholder" />
+
+    <TextView
+        android:id="@+id/tvAdapterFollowUpInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:text="这是一个令人无语的事情"
+        android:textColor="@color/textHintColor"
+        android:textSize="11sp" />
+</LinearLayout>

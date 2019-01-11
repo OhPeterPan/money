@@ -10,6 +10,9 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.zrdb.director.R;
 import com.zrdb.director.ui.BaseActivity;
 import com.zrdb.director.ui.account.LoginActivity;
+import com.zrdb.director.ui.bean.LoginBean;
+import com.zrdb.director.ui.main.MainActivity;
+import com.zrdb.director.util.SpUtil;
 
 import butterknife.BindView;
 
@@ -41,11 +44,11 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 Intent intent = new Intent();
-            /*    LoginResponse response = (LoginResponse) SpUtil.get(SpUtil.ACCOUNT, LoginResponse.class);
-                if (response == null)*/
-                startIntentActivity(intent, LoginActivity.class);
-          /*      else
-                    startIntentActivity(intent, MainActivity.class);*/
+                LoginBean account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
+                if (account == null)
+                    startIntentActivity(intent, LoginActivity.class);
+                else
+                    startIntentActivity(intent, MainActivity.class);
                 finish();
             }
 

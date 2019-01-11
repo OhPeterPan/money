@@ -7,7 +7,9 @@ import android.os.Build;
 import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.Utils;
+import com.zrdb.director.image_loader.ImageLoader;
 import com.zrdb.director.service.InitService;
+import com.zrdb.director.util.UIUtil;
 
 public class AppApplication extends Application {
     private static AppApplication sApplication;
@@ -22,6 +24,7 @@ public class AppApplication extends Application {
         super.onCreate();
         sApplication = this;
         Utils.init(this);
+        ImageLoader.init(UIUtil.getContext());
         Intent intent = new Intent(getApplicationContext(), InitService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent);

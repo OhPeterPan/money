@@ -35,6 +35,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.account.LoginActivity" />
+        <activity android:name=".ui.account.ForgetPwdActivity" />
+        <activity android:name=".ui.account.RegisterActivity" />
     </application>
 
 </manifest>
