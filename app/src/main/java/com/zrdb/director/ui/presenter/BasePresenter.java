@@ -44,7 +44,6 @@ public abstract class BasePresenter<T extends IView> {
                     }
                 }
             }
-
         } else {
             result = true;
         }
