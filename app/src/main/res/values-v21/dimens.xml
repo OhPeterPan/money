@@ -2,25 +2,4 @@
 <resources>
     <dimen name="elevation">20dp</dimen>
     <dimen name="firstItemElevation">2dp</dimen>
-    <dimen name="mainMargin">6dp</dimen>
-    <dimen name="mainPadding">6dp</dimen>
-    <dimen name="toolbarHeight">45dp</dimen>
-    <dimen name="overlapTop">30dp</dimen>
-    <dimen name="titleSize">14sp</dimen>
-    <dimen name="titleRightSize">11sp</dimen>
-    <dimen name="titleRightTopBottom">12sp</dimen>
-    <dimen name="titleRightLeftRight">15sp</dimen>
-    <dimen name="mainDecorationBottom">2dp</dimen>
-    <dimen name="empty_text_size">13sp</dimen>
-    <dimen name="civ_person_height">45dp</dimen>
-    <dimen name="civ_person_width">45dp</dimen>
-    <dimen name="auth_text_size">6sp</dimen>
-    <dimen name="send_time_size">11sp</dimen>
-    <dimen name="price_text_size">13sp</dimen>
-    <dimen name="person_name_text_size">12sp</dimen>
-    <dimen name="person_list_name_size">12sp</dimen>
-    <dimen name="card_view_radius_size">6dp</dimen>
-    <dimen name="login_left_margin">20dp</dimen>
-    <dimen name="login_right_margin">20dp</dimen>
-    <dimen name="standardTextSize">13sp</dimen>
 </resources>

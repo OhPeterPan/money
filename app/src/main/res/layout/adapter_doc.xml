@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:padding="12dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivMulAdapterDocHead"
+        android:layout_width="@dimen/civ_person_height"
+        android:layout_height="@dimen/civ_person_height"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_doc_head" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dp">
+
+        <TextView
+            android:id="@+id/tvAdapterMulPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="名字"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAdapterMulTitleProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/tvAdapterMulPersonName"
+            android:text="名字"
+            android:textColor="#060606"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvAdapterMulOffice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/tvAdapterMulTitleProfessor"
+            android:text="科室"
+            android:textColor="#060606"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvAdapterMulHos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvAdapterMulPersonName"
+            android:layout_marginTop="6dp"
+            android:text="科室"
+            android:textColor="#060606"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvAdapterMulJob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvAdapterMulHos"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="擅长：全面掌握疾病的发病原理"
+            android:textColor="#bbb"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

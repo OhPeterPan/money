@@ -1,11 +1,15 @@
 package com.zrdb.director.ui.main;
 
+import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -21,6 +25,7 @@ import com.zrdb.director.ui.response.SearchResponse;
 import com.zrdb.director.ui.viewImpl.IMainSearchView;
 import com.zrdb.director.util.Convert;
 import com.zrdb.director.util.LogUtil;
+import com.zrdb.director.util.ParamUtils;
 import com.zrdb.director.util.SpUtil;
 import com.zrdb.director.util.ToastUtil;
 
@@ -28,7 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class SearchActivity extends BaseActivity<MainSearchPresenter> implements IMainSearchView {
+public class SearchActivity extends BaseActivity<MainSearchPresenter> implements IMainSearchView, TextView.OnEditorActionListener {
     @BindView(R.id.tvActTitle)
     TextView tvActTitle;
     @BindView(R.id.ivToolbarRight)
@@ -92,7 +97,20 @@ public class SearchActivity extends BaseActivity<MainSearchPresenter> implements
 
     @Override
     protected void initListener() {
+        etSearch.setOnEditorActionListener(this);
+    }
 
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (((actionId == EditorInfo.IME_ACTION_SEARCH) || (actionId == 0)) && event != null) {
+            String keyWord = etSearch.getText().toString().trim();
+            if (!StringUtils.isEmpty(keyWord)) {
+                startIntentActivity(new Intent().putExtra(ParamUtils.KEYWORD, keyWord), SearchDetailActivity.class);
+            } else {
+                ToastUtil.showMessage("请输入要搜索的数据！", Toast.LENGTH_SHORT);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -128,14 +146,14 @@ public class SearchActivity extends BaseActivity<MainSearchPresenter> implements
             tagHistoryLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
                 @Override
                 public boolean onTagClick(View view, int position, FlowLayout parent) {
-                    // startIntentActivity(new Intent().putExtra(ParamUtils.KEYWORD, log.get(position).keywords), SearchDetailActivity.class);
+                    startIntentActivity(new Intent().putExtra(ParamUtils.KEYWORD, log.get(position).keywords), SearchDetailActivity.class);
                     return true;
                 }
             });
         }
     }
 
-    private void setTag(List<KeywordBean> tag) {
+    private void setTag(final List<KeywordBean> tag) {
         if (tag == null || tag.size() == 0) {
             tagFlowLayout.setVisibility(View.GONE);
         } else {
@@ -144,7 +162,7 @@ public class SearchActivity extends BaseActivity<MainSearchPresenter> implements
             tagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
                 @Override
                 public boolean onTagClick(View view, int position, FlowLayout parent) {
-
+                    startIntentActivity(new Intent().putExtra(ParamUtils.KEYWORD, tag.get(position).keywords), SearchDetailActivity.class);
                     return true;
                 }
             });
@@ -155,4 +173,6 @@ public class SearchActivity extends BaseActivity<MainSearchPresenter> implements
     public void showDataErrInfo(String result) {
 
     }
+
+
 }

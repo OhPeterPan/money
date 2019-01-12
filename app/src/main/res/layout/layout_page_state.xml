@@ -11,6 +11,6 @@
         android:elevation="@dimen/elevation"
         android:includeFontPadding="false"
         android:text="暂无消息~"
-        android:textColor="#818080"
+        android:textColor="#121116"
         android:textSize="13sp" />
 </FrameLayout>

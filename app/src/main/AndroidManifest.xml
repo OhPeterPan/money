@@ -40,6 +40,7 @@
         <activity android:name=".ui.main.SearchActivity" />
         <activity android:name=".ui.main.MessageActivity" />
         <activity android:name=".test.TestActivity" />
+        <activity android:name=".ui.main.SearchDetailActivity" />
     </application>
 
 </manifest>
