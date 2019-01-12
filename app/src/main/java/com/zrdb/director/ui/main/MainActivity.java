@@ -23,6 +23,7 @@ import com.zrdb.director.banner.BannerImpl;
 import com.zrdb.director.banner.IBanner;
 import com.zrdb.director.decorate.MainGridDecorate;
 import com.zrdb.director.image_loader.ImageLoader;
+import com.zrdb.director.test.TestActivity;
 import com.zrdb.director.ui.BaseActivity;
 import com.zrdb.director.ui.bean.IndexBean;
 import com.zrdb.director.ui.bean.IndexListBean;
@@ -131,10 +132,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 startIntentActivity(new Intent(), SearchActivity.class);
                 break;
             case R.id.ivMainMessage://消息
-                startIntentActivity(new Intent(),MessageActivity.class);
+                startIntentActivity(new Intent(), MessageActivity.class);
                 break;
             case R.id.ivMainShare://分享
-
+                startIntentActivity(new Intent(), TestActivity.class);
                 break;
         }
     }

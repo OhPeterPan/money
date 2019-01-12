@@ -39,6 +39,7 @@
         <activity android:name=".ui.account.RegisterActivity" />
         <activity android:name=".ui.main.SearchActivity" />
         <activity android:name=".ui.main.MessageActivity" />
+        <activity android:name=".test.TestActivity" />
     </application>
 
 </manifest>

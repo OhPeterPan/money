@@ -1,5 +1,6 @@
 package com.zrdb.director.ui.account;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -20,6 +21,7 @@ import com.zrdb.director.ui.presenter.LoginPresenter;
 import com.zrdb.director.ui.viewImpl.ILoginView;
 import com.zrdb.director.util.Convert;
 import com.zrdb.director.util.LogUtil;
+import com.zrdb.director.util.ParamUtils;
 import com.zrdb.director.util.SpUtil;
 import com.zrdb.director.util.ToastUtil;
 
@@ -135,5 +137,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     @Override
     public void showDataErrInfo(String result) {
 
+    }
+
+    public static void launchNewFlag(Context mContext) {
+        Intent in = new Intent(mContext, LoginActivity.class);
+        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        in.putExtra(ParamUtils.FLAG, 1);
+        mContext.startActivity(in);
     }
 }
