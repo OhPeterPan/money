@@ -17,7 +17,12 @@ public abstract class BasePresenter<T extends IView> {
     //判断是否返回的数据是否包含错误
     public boolean checkResultError(String message) {
         boolean result = false;
-
+        if (mView != null) {
+            result = false;
+            mView.hideLoading();
+        } else {
+            result = true;
+        }
         return result;
     }
 
@@ -33,5 +38,4 @@ public abstract class BasePresenter<T extends IView> {
         if (mView != null)
             mView = null;
     }
-
 }

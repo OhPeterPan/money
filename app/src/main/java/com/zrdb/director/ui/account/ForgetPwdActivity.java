@@ -6,14 +6,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zrdb.director.R;
 import com.zrdb.director.ui.BaseActivity;
+import com.zrdb.director.ui.presenter.ForgetPwdPresenter;
+import com.zrdb.director.ui.response.RegisterResponse;
+import com.zrdb.director.ui.viewImpl.IForgetPwdView;
+import com.zrdb.director.util.Convert;
+import com.zrdb.director.util.ToastUtil;
 import com.zrdb.director.util.UIUtil;
 
 import butterknife.BindView;
 
-public class ForgetPwdActivity extends BaseActivity {
+public class ForgetPwdActivity extends BaseActivity<ForgetPwdPresenter> implements IForgetPwdView {
 
     @BindView(R.id.forgetPwdPhone)
     EditText forgetPwdPhone;
@@ -49,7 +55,6 @@ public class ForgetPwdActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (mCountDownTimer != null) {
-
             mCountDownTimer.cancel();
         }
     }
@@ -61,7 +66,7 @@ public class ForgetPwdActivity extends BaseActivity {
 
     @Override
     protected void initPresenter() {
-
+        presenter = new ForgetPwdPresenter(this);
     }
 
     @Override
@@ -82,12 +87,55 @@ public class ForgetPwdActivity extends BaseActivity {
             case R.id.ivForgetPwdClearPhone:
                 forgetPwdPhone.setText("");
                 break;
-            case R.id.tvGetVerify:
-                mCountDownTimer.start();
+            case R.id.tvGetVerify://获取验证码
+                getVerifyCode();
                 break;
             case R.id.btnConfirmChangePwd:
-
+                confirmChangePwd();
                 break;
         }
+    }
+
+    private void confirmChangePwd() {
+        String phone = forgetPwdPhone.getText().toString().trim();
+        String pwd = etInputNewPwd.getText().toString().trim();
+        String verify = forgetPwdVerify.getText().toString().trim();
+        if (presenter.checkInfo(phone,pwd,verify)) {
+            presenter.sendNetChangePwd(phone,pwd,verify);
+        }
+    }
+
+    private void getVerifyCode() {
+        String phone = forgetPwdPhone.getText().toString().trim();
+        if (presenter.checkPhone(phone)) {
+            presenter.sendNetGetVerify(phone);
+        }
+    }
+
+    @Override
+    public void getVerifyResultSuccess(String result) {
+        RegisterResponse registerResponse = Convert.fromJson(result, RegisterResponse.class);
+        if (registerResponse.code == 200) {
+            mCountDownTimer.start();
+            ToastUtil.showMessage("验证码已发送，请注意查收！", Toast.LENGTH_SHORT);
+        } else {
+            ToastUtil.showMessage(registerResponse.msg, Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void changePwdResultSuccess(String result) {
+        RegisterResponse registerResponse = Convert.fromJson(result, RegisterResponse.class);
+        if (registerResponse.code == 200) {
+            ToastUtil.showMessage("密码修改成功", Toast.LENGTH_SHORT);
+            finish();
+        } else {
+            ToastUtil.showMessage(registerResponse.msg, Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void showDataErrInfo(String result) {
+
     }
 }

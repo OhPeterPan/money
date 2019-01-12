@@ -20,9 +20,6 @@ import com.zrdb.director.image_loader.ImageConfig;
 
 public class GlideLoader implements ILoader {
     private ImageConfig mConfig;
-    private static RequestOptions RequestOptions = new RequestOptions()
-            .centerCrop()
-            .diskCacheStrategy(DiskCacheStrategy.NONE);
 
     @Override
     public void init(Context context, int cacheSize, MemoryCategory memoryCategory, boolean isInternalCD) {
@@ -39,11 +36,6 @@ public class GlideLoader implements ILoader {
     public void request(ImageConfig config) {
         this.mConfig = config;
         if (mConfig == null) return;
-        if (RequestOptions == null)
-            RequestOptions = new RequestOptions()
-                    .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.NONE);
-
         RequestBuilder<Bitmap> builder = null;
         RequestManager requestManager = Glide.with(config.context);
         if (config.asBitmap)
@@ -56,11 +48,12 @@ public class GlideLoader implements ILoader {
         } else {
             builder = builder.load(R.drawable.ic_test_image);
         }
-
-        RequestOptions.error(config.errIdRes == 0 ? R.drawable.ic_placeholder : config.errIdRes);
-        RequestOptions.placeholder(config.placeholder == 0 ? R.drawable.ic_placeholder : config.placeholder);
-        RequestOptions.diskCacheStrategy(config.diskCacheStrategy == null ? DiskCacheStrategy.ALL : config.diskCacheStrategy);
-        RequestOptions.skipMemoryCache(config.skipMemory);
+        RequestOptions RequestOptions = new RequestOptions()
+                .error(config.errIdRes == 0 ? R.drawable.ic_placeholder : config.errIdRes)
+                .placeholder(config.placeholder == 0 ? R.drawable.ic_placeholder : config.placeholder)
+                .diskCacheStrategy(config.diskCacheStrategy == null ? DiskCacheStrategy.ALL : config.diskCacheStrategy)
+                .skipMemoryCache(config.skipMemory)
+                .centerCrop();
         if (builder != null && mConfig != null && mConfig.view != null)
             builder.apply(RequestOptions).into((ImageView) mConfig.view);
     }

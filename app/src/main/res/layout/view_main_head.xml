@@ -6,62 +6,16 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
-    <FrameLayout
+    <com.youth.banner.Banner
+        android:id="@id/banner"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/eee">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <ImageView
-                android:id="@+id/ivMainMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:padding="6dp"
-                android:src="@drawable/ic_message" />
-
-            <ImageView
-                android:id="@+id/ivMainShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:layout_toLeftOf="@id/ivMainMessage"
-                android:padding="6dp"
-                android:src="@drawable/ic_share" />
-
-            <com.zrdb.director.custom_view.CenterTextView
-                android:id="@+id/tvMainSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@id/ivMainShare"
-                android:background="@drawable/shape_circle_white"
-                android:drawableLeft="@drawable/ic_search"
-                android:drawablePadding="6dp"
-                android:padding="6dp"
-                android:text="孕期体温计"
-                android:textColor="#616161"
-                android:textSize="13sp" />
-        </RelativeLayout>
-
-        <com.youth.banner.Banner
-            android:id="@id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:banner_layout="@layout/banner"
-            app:delay_time="1500"
-            app:image_scale_type="center_crop"
-            app:indicator_margin="5dp"
-            app:is_auto_play="true"
-            app:layout_collapseMode="parallax"
-            app:title_textcolor="@android:color/transparent" />
-    </FrameLayout>
+        android:layout_height="200dp"
+        app:banner_layout="@layout/banner"
+        app:delay_time="2000"
+        app:image_scale_type="center_crop"
+        app:indicator_margin="5dp"
+        app:is_auto_play="true"
+        app:title_textcolor="@android:color/transparent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -251,6 +205,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:includeFontPadding="false"
             android:paddingBottom="8dp"
             android:paddingLeft="8dp"
             android:paddingTop="8dp"
@@ -261,6 +216,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:includeFontPadding="false"
             android:text="一人看病全家无忧"
             android:textColor="@color/textHintColor"
             android:textSize="11sp" />
@@ -289,6 +246,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:includeFontPadding="false"
             android:paddingBottom="8dp"
             android:paddingLeft="8dp"
             android:paddingTop="8dp"
@@ -299,6 +257,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:includeFontPadding="false"
             android:text="主任当班独家提供"
             android:textColor="@color/textHintColor"
             android:textSize="11sp" />

@@ -37,6 +37,8 @@
         <activity android:name=".ui.account.LoginActivity" />
         <activity android:name=".ui.account.ForgetPwdActivity" />
         <activity android:name=".ui.account.RegisterActivity" />
+        <activity android:name=".ui.main.SearchActivity" />
+        <activity android:name=".ui.main.MessageActivity" />
     </application>
 
 </manifest>

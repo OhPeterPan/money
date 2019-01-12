@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +108,14 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             back.setVisibility(visibility);
     }
 
+    public void setBackRes(int res) {
+        if (null != back) {
+            if (back instanceof ImageView) {
+                ((ImageView) back).setImageResource(res);
+            }
+        }
+    }
+
     protected void initView() {
         back = findViewById(R.id.back);
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
@@ -118,6 +127,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
         for (int i = 0; i < 20; i++) {
             testList.add("别紧张，这只是一个测试而已");
+        }
+    }
+
+    protected void setSwipeRefresh(boolean enable) {
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setEnabled(enable);
         }
     }
 
@@ -173,6 +188,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }
 
     protected void innerRefresh() {
-        LogUtil.LogI("下拉刷新！");
+
     }
 }

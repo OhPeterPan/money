@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/recyclerView"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:overScrollMode="never" />
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvMainService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#f5f1f0"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/main_bottom_service"
+        android:textColor="#989999"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tvMainService"
+        android:overScrollMode="never" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/ivMainMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="6dp"
+            android:src="@drawable/ic_message" />
+
+        <ImageView
+            android:id="@+id/ivMainShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:layout_toLeftOf="@id/ivMainMessage"
+            android:padding="6dp"
+            android:src="@drawable/ic_share" />
+
+        <com.zrdb.director.custom_view.CenterTextView
+            android:id="@+id/tvMainSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/ivMainShare"
+            android:background="@drawable/shape_circle_white"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="6dp"
+            android:padding="6dp"
+            android:text="孕期体温计"
+            android:textColor="#616161"
+            android:textSize="13sp" />
+    </RelativeLayout>
+</RelativeLayout>
+

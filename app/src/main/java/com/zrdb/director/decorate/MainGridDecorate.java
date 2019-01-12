@@ -20,6 +20,5 @@ public class MainGridDecorate extends RecyclerView.ItemDecoration {
                 outRect.set(space, 0, space, 0);
             }
         }
-
     }
 }
