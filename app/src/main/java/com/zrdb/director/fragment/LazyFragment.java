@@ -34,11 +34,11 @@ public abstract class LazyFragment<T extends BasePresenter> extends Fragment
     public boolean hasMore;
     public boolean isRefresh = true;
 
-    @Override
+ /*   @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // LogUtil.LogI(getClass().getSimpleName() + ".onCreate()");
-    }
+    }*/
 
     @Nullable
     @Override
@@ -127,10 +127,16 @@ public abstract class LazyFragment<T extends BasePresenter> extends Fragment
                 initPresenter();
                 fetchData();
                 isInitData = true;
+            } else {
+                resetFetchData();
             }
         }
     }
 
+    //数据已经填充后的加载
+    protected void resetFetchData() {
+        LogUtil.LogI("再来?");
+    }
 
     @Override
     public void onDestroyView() {
@@ -143,7 +149,7 @@ public abstract class LazyFragment<T extends BasePresenter> extends Fragment
 
     @Override
     public void onDestroy() {
-        //LogUtil.LogI(getClass().getSimpleName() + ".onDestroy()");
+        LogUtil.LogI(getClass().getSimpleName() + ".onDestroy()");
         if (unbinder != null) unbinder.unbind();
         if (presenter != null) presenter.destroy();
         isInitViewPage = false;
@@ -167,4 +173,8 @@ public abstract class LazyFragment<T extends BasePresenter> extends Fragment
     }
 
     protected abstract void innerRefresh();
+
+    public void setKeyword(String keyword) {
+
+    }
 }

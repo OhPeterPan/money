@@ -35,7 +35,6 @@ public abstract class BasePresenter<T extends IView> {
                 result = false;
             } else {
                 result = true;
-
                 if (TextUtils.equals("用户验证错误", baseResponse.msg)) {//重新登录
                     ToastUtil.showMessage(baseResponse.msg + ",请重新登录！", Toast.LENGTH_SHORT);
                     if (mView instanceof AppCompatActivity) {

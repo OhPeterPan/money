@@ -54,7 +54,7 @@ public class TestActivity extends AppCompatActivity {
             TextView tv = (TextView) mInflater.inflate(R.layout.layout_tag, parent, false);
             ViewGroup.LayoutParams lp = tv.getLayoutParams();
             // LogUtil.LogI("padding:" + tv.getPaddingLeft() + ":::" + tv.getPaddingRight());
-            lp.width = (screenWidth - SizeUtils.dp2px(12) * 2 - SizeUtils.dp2px(15) * 2) / 3;
+            lp.width = (screenWidth - SizeUtils.dp2px(6) * 2 - SizeUtils.dp2px(15) * 2) / 3;
             //tv.setLayoutParams(lp);
             tv.setText(s);
             return tv;

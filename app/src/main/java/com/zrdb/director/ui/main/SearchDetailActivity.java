@@ -1,6 +1,7 @@
 package com.zrdb.director.ui.main;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.zrdb.director.R;
 import com.zrdb.director.adapter.FragmentAdapter;
+import com.zrdb.director.fragment.LazyFragment;
 import com.zrdb.director.fragment.searchfrag.DocFragment;
 import com.zrdb.director.fragment.searchfrag.HospitalFrag;
 import com.zrdb.director.fragment.searchfrag.MultipleFrag;
@@ -69,6 +72,12 @@ public class SearchDetailActivity extends BaseActivity implements TextView.OnEdi
         Fragment oneFrag = MultipleFrag.newInstance(keyword);
         Fragment twoFrag = DocFragment.newInstance(keyword);
         Fragment threeFrag = HospitalFrag.newInstance(keyword);
+        ((MultipleFrag) oneFrag).setOnPageChangeListener(new MultipleFrag.OnPageChangeListener() {
+            @Override
+            public void pagePos(int position) {
+                if (viewPager != null) viewPager.setCurrentItem(position);
+            }
+        });
         fragList.add(oneFrag);
         fragList.add(twoFrag);
         fragList.add(threeFrag);
@@ -104,12 +113,25 @@ public class SearchDetailActivity extends BaseActivity implements TextView.OnEdi
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (((actionId == EditorInfo.IME_ACTION_SEARCH) || (actionId == 0)) && event != null) {
-            String keyWord = etSearchDetail.getText().toString().trim();
-            if (!StringUtils.isEmpty(keyWord)) {
-                if (fragList != null)
-                    fragList.get(currPos)
-                            .onActivityResult(0x100, 0x200,
-                                    new Intent().putExtra(ParamUtils.KEYWORD, keyWord));
+            KeyboardUtils.hideSoftInput(this);
+            String keyword = etSearchDetail.getText().toString().trim();
+            Bundle bundle;
+            if (!StringUtils.isEmpty(keyword)) {
+                if (fragList != null) {
+                    for (int i = 0; i < fragList.size(); i++) {
+                        if (i == currPos) {
+                            fragList.get(i)
+                                    .onActivityResult(0x100, 0x200,
+                                            new Intent().putExtra(ParamUtils.KEYWORD, keyword));
+                        } else {
+                            ((LazyFragment) fragList.get(i)).setKeyword(keyword);
+                            bundle = new Bundle();
+                            bundle.putString(ParamUtils.KEYWORD, keyword);
+                            fragList.get(i).setArguments(bundle);
+                        }
+                    }
+                }
+
             } else {
                 ToastUtil.showMessage("请输入要搜索的数据！", Toast.LENGTH_SHORT);
             }

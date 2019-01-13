@@ -135,8 +135,6 @@ public class SearchActivity extends BaseActivity<MainSearchPresenter> implements
     }
 
     private void setHistory(final List<KeywordBean> log) {
-        log.add(new KeywordBean("测试一下"));
-        log.add(new KeywordBean("测试两下"));
         if (log == null || log.size() == 0) {
             tagHistoryLayout.setVisibility(View.GONE);
         } else {

@@ -10,6 +10,10 @@ public class ApiUtils {
     public static final String MAIN_INDEX_URL = "Index/index?client_id=" + clientId + "&client_token=";
     public static final String SEARCH_INFO_URL = "Index/search_log?client_id=" + clientId + "&client_token=";
     public static final String MULTIPLE_RESULT_URL = "index/search?client_id=" + clientId + "&client_token=";
+    public static final String FILTER_DOC_URL = "index/search_doctor?client_id=" + clientId + "&client_token=";
+    public static final String FILTER_DOC_INFO_URL = "index/search_doctor_filter?client_id=" + clientId + "&client_token=";
+    public static final String FILTER_HOS_URL = "index/search_hospital?client_id=" + clientId + "&client_token=";
+    public static final String FILTER_HOS_INFO_URL = "index/search_hospital_filter?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;

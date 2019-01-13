@@ -2,11 +2,12 @@ package com.zrdb.director.fragment.searchfrag;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-import com.blankj.utilcode.util.KeyboardUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zrdb.director.R;
 import com.zrdb.director.adapter.MultipleAdapter;
 import com.zrdb.director.fragment.LazyFragment;
@@ -28,7 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implements IMultipleResultView {
+public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implements IMultipleResultView, BaseQuickAdapter.OnItemChildClickListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -36,6 +37,8 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
     private LoginBean account;
     private MultipleAdapter adapter;
     private List<MultipleTypeBean> multipleList = new ArrayList<>();
+    private String oldKeyword;
+    private OnPageChangeListener listener;
 
     @Override
     protected int getLayoutId() {
@@ -48,13 +51,29 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
     }
 
     @Override
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    @Override
     protected void fetchData() {
         Bundle bundle = getArguments();
         keyword = bundle.getString(ParamUtils.KEYWORD);
+        oldKeyword = keyword;
         account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         initAdapter();
         setRefresh(true);
         innerRefresh();
+    }
+
+    @Override
+    protected void resetFetchData() {
+        super.resetFetchData();
+        if (!StringUtils.equals(oldKeyword, keyword)) {
+            setRefresh(true);
+            innerRefresh();
+            oldKeyword = keyword;
+        }
     }
 
     private void initAdapter() {
@@ -62,6 +81,21 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemChildClickListener(this);
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter ada, View v, int position) {
+        MultipleTypeBean typeBean = adapter.getItem(position);
+        if (listener == null) return;
+        switch (typeBean.name) {
+            case "相关医生":
+                listener.pagePos(1);
+                break;
+            case "相关医院":
+                listener.pagePos(2);
+                break;
+        }
     }
 
     @Override
@@ -70,8 +104,8 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
         presenter.sendNet(account.token, account.uid, keyword);
     }
 
-    public static Fragment newInstance(String keyword) {
-        Fragment fragment = new MultipleFrag();
+    public static MultipleFrag newInstance(String keyword) {
+        MultipleFrag fragment = new MultipleFrag();
         Bundle bundle = new Bundle();
         bundle.putString(ParamUtils.KEYWORD, keyword);
         fragment.setArguments(bundle);
@@ -81,7 +115,7 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
     @Override
     public void getMultipleResultSuccess(String result) {
         //LogUtil.LogI("multiple:" + result);
-        KeyboardUtils.hideSoftInput(getActivity());
+        //KeyboardUtils.hideSoftInput(getActivity());
         MultipleResponse response = Convert.fromJson(result, MultipleResponse.class);
         MultipleBean data = response.data;
         setMultipleData(data);
@@ -134,5 +168,13 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
     @Override
     public void showDataErrInfo(String result) {
 
+    }
+
+    public void setOnPageChangeListener(OnPageChangeListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnPageChangeListener {
+        void pagePos(int position);
     }
 }
