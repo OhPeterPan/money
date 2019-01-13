@@ -3,6 +3,7 @@ package com.zrdb.director.util;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.zrdb.director.R;
 
 public class LogUtil {
     private static final String TAG = "wak";
@@ -16,6 +17,12 @@ public class LogUtil {
     public static void LogE(Throwable e) {
         if (ApiUtils.Config.DEBUG) {
             Log.e(TAG, "", e);
+        }
+    }
+
+    public static void logResult(String msg, String result) {
+        if (ApiUtils.Config.DEBUG) {
+            LogUtils.iTag(TAG, String.format(UIUtil.getString(R.string.printf), msg, result));
         }
     }
 }

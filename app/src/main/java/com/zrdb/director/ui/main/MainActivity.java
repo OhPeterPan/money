@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.zrdb.director.ui.bean.LoginBean;
 import com.zrdb.director.ui.presenter.MainPresenter;
 import com.zrdb.director.ui.response.MainResponse;
 import com.zrdb.director.ui.viewImpl.IMainView;
+import com.zrdb.director.ui.visit.IntelligentVisitActivity;
 import com.zrdb.director.util.ApiUtils;
 import com.zrdb.director.util.Convert;
 import com.zrdb.director.util.LogUtil;
@@ -62,6 +64,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     private FollowUpAdapter followUpAdapter;
     private Banner banner;
     private IBanner bannerImpl;
+    private LinearLayout llMainHeadIntelligentVisit;
 
     @Override
     protected void initStatusBar() {
@@ -97,9 +100,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     private void initHeadView() {
         headView = LayoutInflater.from(this).inflate(R.layout.view_main_head, recyclerView, false);
         horizontalRecyclerView = headView.findViewById(R.id.horizontalRecyclerView);
+        llMainHeadIntelligentVisit = headView.findViewById(R.id.llMainHeadIntelligentVisit);
         banner = headView.findViewById(R.id.banner);
         initFollowAdapter();
         adapter.addHeaderView(headView);
+        llMainHeadIntelligentVisit.setOnClickListener(this);
     }
 
     private void initFollowAdapter() {
@@ -136,6 +141,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 break;
             case R.id.ivMainShare://分享
                 startIntentActivity(new Intent(), TestActivity.class);
+                break;
+            case R.id.llMainHeadIntelligentVisit://智能就诊
+                startIntentActivity(new Intent(), IntelligentVisitActivity.class);
                 break;
         }
     }

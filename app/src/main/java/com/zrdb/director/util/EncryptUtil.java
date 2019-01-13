@@ -9,7 +9,6 @@ public class EncryptUtil {
         if (TextUtils.isEmpty(msg)) {
             return "";
         }
-        //LogUtil.LogI("明文" + msg);
         try {
             byte[] btInput = msg.getBytes("utf-8");
             MessageDigest mdInst = MessageDigest.getInstance("MD5");
@@ -23,7 +22,6 @@ public class EncryptUtil {
                 }
                 sb.append(Integer.toHexString(val));
             }
-            //LogUtil.LogI(sb.toString());
             return sb.toString();
         } catch (Exception e) {
             return null;

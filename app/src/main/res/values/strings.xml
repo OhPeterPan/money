@@ -21,4 +21,5 @@
     <string name="address_name">收货人：%s</string>
     <string name="address_detail_name">收货地址：%s</string>
     <string name="main_bottom_service">平台服务由黑龙江邦庶医疗咨询服务有效公司提供</string>
+    <string name="printf">%1$s:%2$s</string>
 </resources>

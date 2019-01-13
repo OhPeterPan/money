@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/ivAdapterMessagePic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_bespoke_message" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAdapterMessageDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="您好,您购买了保障卡。个人中心查看订单。"
+            android:textColor="@color/standardTextColor"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvAdapterMessageInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:singleLine="true"
+            android:text="您好,您购买了保障卡。个人中心查看订单。"
+            android:textColor="@color/textHintColor"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

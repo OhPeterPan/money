@@ -41,6 +41,7 @@
         <activity android:name=".ui.main.MessageActivity" />
         <activity android:name=".test.TestActivity" />
         <activity android:name=".ui.main.SearchDetailActivity" />
+        <activity android:name=".ui.visit.IntelligentVisitActivity" />
     </application>
 
 </manifest>

@@ -14,6 +14,8 @@ public class ApiUtils {
     public static final String FILTER_DOC_INFO_URL = "index/search_doctor_filter?client_id=" + clientId + "&client_token=";
     public static final String FILTER_HOS_URL = "index/search_hospital?client_id=" + clientId + "&client_token=";
     public static final String FILTER_HOS_INFO_URL = "index/search_hospital_filter?client_id=" + clientId + "&client_token=";
+    public static final String MESSAGE_URL = "Index/message?client_id=" + clientId + "&client_token=";
+    public static final String ENSURE_STATE_URL = "Card/status?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;
