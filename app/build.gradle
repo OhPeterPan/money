@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.zrdb.director"
+        applicationId "com.zrdb.app"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1

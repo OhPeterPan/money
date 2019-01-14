@@ -47,7 +47,7 @@
             android:padding="6dp"
             android:src="@drawable/ic_share" />
 
-        <com.zrdb.director.custom_view.CenterTextView
+        <com.zrdb.app.custom_view.CenterTextView
             android:id="@+id/tvMainSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -14,10 +15,11 @@
         android:layout_height="1dp"
         android:background="@color/eee" />
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,7 +151,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.7"
                     android:drawableLeft="@drawable/ic_intel_person"
                     android:drawablePadding="6dp"
                     android:padding="12dp"
@@ -183,7 +185,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.7"
                     android:drawableLeft="@drawable/ic_intel_phone"
                     android:drawablePadding="6dp"
                     android:padding="12dp"
@@ -224,16 +226,16 @@
                     android:text="希望就诊城市"
                     android:textColor="@color/standardTextColor"
                     android:textSize="12sp" />
-
-                <TextView
+                <!--          android:drawablePadding="6dp"
+                          android:drawableRight="@drawable/ic_report_triangle"-->
+                <EditText
                     android:id="@+id/tvIntelChooseAddress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawablePadding="6dp"
-                    android:drawableRight="@drawable/ic_report_triangle"
+                    android:background="@null"
                     android:gravity="center_vertical|right"
+                    android:hint="请输入城市"
                     android:paddingRight="12dp"
-                    android:text="请选择"
                     android:textColor="@color/standardTextColor"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -273,7 +275,11 @@
                 android:id="@+id/tagIntelFlow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp" />
+                android:paddingBottom="7dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="12dp"
+                app:max_select="1" />
 
             <View
                 android:layout_width="match_parent"
@@ -289,7 +295,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_herd_pic"
+                    android:drawableLeft="@drawable/ic_intel_symptom_pic"
                     android:drawablePadding="6dp"
                     android:paddingLeft="12dp"
                     android:paddingTop="12dp"
@@ -310,7 +316,11 @@
                 android:id="@+id/tagIntelHerdFlow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp" />
+                android:paddingBottom="7dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="12dp"
+                app:max_select="1" />
 
             <EditText
                 android:id="@+id/etInputHerdDetail"
@@ -342,6 +352,7 @@
                     android:id="@+id/ivIntelChooseHerdPic"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_intel_add_pic_placeholder" />
 
                 <LinearLayout
@@ -351,6 +362,7 @@
                     android:paddingLeft="12dp">
 
                     <TextView
+                        android:id="@+id/tvImageState"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="添加图片(可选项)"
@@ -381,16 +393,32 @@
                 android:background="@color/eee"
                 android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/cbIntelServiceScheme"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="40dp"
                     android:layout_marginTop="40dp"
-                    android:text="您已同意主任当班服务协议"
-                    android:textColor="#959394"
-                    android:textSize="13sp" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbIntelServiceScheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="您已同意"
+                        android:textColor="#959394"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvSchemeDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="主任当班服务协议"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/btnSubmitHerd"
@@ -406,5 +434,5 @@
                     android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 </LinearLayout>

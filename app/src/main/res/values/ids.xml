@@ -11,4 +11,13 @@
     <item name="swipeRefresh" type="id" />
     <item name="ivToolbarRight" type="id" />
     <item name="tvEmpty" type="id" />
+    <item name="llAddress" type="id" />
+    <item name="tvAddress" type="id" />
+    <item name="ivAddress" type="id" />
+    <item name="llTechnical" type="id" />
+    <item name="tvTechnical" type="id" />
+    <item name="ivTechnical" type="id" />
+    <item name="llRank" type="id" />
+    <item name="tvRank" type="id" />
+    <item name="ivRank" type="id" />
 </resources>

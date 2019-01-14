@@ -8,4 +8,7 @@
     <color name="standardTextColor">#363636</color>
     <color name="eee">#eee</color>
     <color name="textHintColor">#b2b2b2</color>
+    <color name="grayBackground">#f4f3f8</color>
+    <color name="lookDocTextColor">#808080</color>
+    <color name="textYellow">#d3a872</color>
 </resources>

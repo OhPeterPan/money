@@ -23,4 +23,9 @@
     <dimen name="login_left_margin">20dp</dimen>
     <dimen name="login_right_margin">20dp</dimen>
     <dimen name="standardTextSize">13sp</dimen>
+    <dimen name="lookDocPaddingTop">15dp</dimen>
+    <dimen name="lookDocPaddingBottom">15dp</dimen>
+    <dimen name="lookDocTextSize">12sp</dimen>
+    <dimen name="lookDocDrawablePadding">6dp</dimen>
+    <dimen name="directorSize">55dp</dimen>
 </resources>

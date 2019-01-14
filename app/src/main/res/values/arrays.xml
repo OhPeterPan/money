@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender">
+        <item>男</item>
+        <item>女 </item>
+    </string-array>
+    <string-array name="depositState">
+        <item>全部</item>
+        <item>申请中 </item>
+        <item>申请成功 </item>
+    </string-array>
+    <string-array name="stockIn"><!--入库看板-->
+        <item>全部类型</item>
+        <item>采购入库 </item>
+        <item>调拨入库 </item>
+        <item>销售退货 </item>
+        <item>其他入库 </item>
+        <item>盘盈 </item>
+    </string-array>
+    <string-array name="newStockOut"><!--新增出库-->
+        <item>销售出库</item>
+        <item>采购退回 </item>
+        <item>赠品出库 </item>
+        <item>调拨出库 </item>
+        <item>其他出库 </item>
+        <item>积分兑换出库 </item>
+    </string-array>
+
+    <string-array name="newStockIn"><!--新增入库-->
+        <item>采购入库</item>
+        <item>销售退货 </item>
+        <item>调拨入库 </item>
+        <item>其他入库 </item>
+    </string-array>
+
+    <string-array name="stockOut"><!--出库看板-->
+        <item>盘亏 </item>
+        <item>全部类型</item>
+        <item>销售出库 </item>
+        <item>采购退回 </item>
+        <item>其他出库 </item>
+        <item>调拨出库 </item>
+        <item>赠品出库 </item>
+        <item>积分兑换出库 </item>
+    </string-array>
+    <string-array name="stockPartOut"><!--调拨看板-->
+        <item>调拨入库 </item>
+        <item>调拨出库 </item>
+    </string-array>
+
+    <string-array name="stockAll"><!--全部看板-->
+        <item>盘盈 </item>
+        <item>盘亏 </item>
+        <item>全部类型</item>
+        <item>全部入库 </item>
+        <item>采购入库 </item>
+        <item>销售退货 </item>
+        <item>其它入库 </item>
+        <item>全部出库</item>
+        <item>销售出库 </item>
+        <item>采购退回 </item>
+        <item>其它出库 </item>
+        <item>调拨入库 </item>
+        <item>调拨出库 </item>
+        <item>赠品出库 </item>
+        <item>积分兑换出库 </item>
+    </string-array>
+    <string-array name="receptionOrderState"><!--订单记录-->
+        <item>全部 </item>
+        <item>欠账 </item>
+        <item>结账</item>
+        <item>分单 </item>
+        <item>作废 </item>
+    </string-array>
+    <!--中国工商银行、中国农业银行、中国银行、中国建设银行、交通银行-->
+    <string-array name="bank">
+        <item>中国工商银行 </item>
+        <item>中国农业银行 </item>
+        <item>中国银行</item>
+        <item>中国建设银行 </item>
+        <item>交通银行 </item>
+        <item>招商银行 </item>
+        <item>中信银行 </item>
+        <item>中国民生银行 </item>
+        <item>兴业银行 </item>
+        <item>上海浦东发展银行 </item>
+        <item>中国邮政储蓄银行 </item>
+        <item>中国光大银行 </item>
+    </string-array>
+    <string-array name="circle_title">
+        <item>我的关注 </item>
+        <item>每日精选 </item>
+        <item>热门圈子 </item>
+    </string-array>
+
+    <string-array name="self_comment">
+        <item>回复此评论 </item>
+        <item>私信 </item>
+        <item>复制 </item>
+        <item>删除 </item>
+    </string-array>
+    <string-array name="derive_bill_state">
+        <item>全部账单 </item>
+        <item>仅充值账单 </item>
+        <item>仅消费账单 </item>
+    </string-array>
+
+
+    <string-array name="no_self_comment">
+        <item>回复此评论 </item>
+        <item>私信 </item>
+        <item>复制 </item>
+    </string-array>
+    <string-array name="hot_theme_detail">
+        <item>按时间 </item>
+        <item>按评论 </item>
+        <item>按阅读 </item>
+    </string-array>
+    <string-array name="discuss">
+        <item>我收到的评论 </item>
+        <item>我发出的评论 </item>
+    </string-array>
+    <string-array name="discuss_state_list">
+        <item>按时间 </item>
+        <item>按热度 </item>
+    </string-array>
+    <string-array name="take_good_index">
+        <item>一次 </item>
+        <item>二次 </item>
+        <item>三次 </item>
+        <item>四次 </item>
+        <item>五次 </item>
+    </string-array>
+
+    <string-array name="good_detail_title">
+        <item>商品 </item>
+        <item>详情 </item>
+    </string-array>
+    <string-array name="good_state_array">
+        <item>综合排序 </item>
+        <item>价格从高到底 </item>
+        <item>价格从低到高 </item>
+    </string-array>
+    <string-array name="marry_state">
+        <item>未婚 </item>
+        <item>已婚 </item>
+    </string-array>
+    <string-array name="polity_state">
+        <item>党员 </item>
+        <item>团员 </item>
+        <item>群众 </item>
+        <item>其他 </item>
+    </string-array>
+    <string-array name="qualifications_state">
+        <item>初中 </item>
+        <item>高中 </item>
+        <item>中专 </item>
+        <item>大专 </item>
+        <item>本科 </item>
+        <item>硕士 </item>
+        <item>博士 </item>
+        <item>其他 </item>
+    </string-array>
+    <string-array name="supplier_detail_title">
+        <item>店铺首页 </item>
+        <item>全部商品 </item>
+        <item>新品上架 </item>
+        <item>店铺动态 </item>
+    </string-array>
+    <string-array name="person">
+        <item>女性</item>
+        <item>儿童</item>
+        <item>男性</item>
+        <item>老人</item>
+        <item>孕妇</item>
+    </string-array>
+    <string-array name="symptom">
+        <item>消化问题</item>
+        <item>高血压</item>
+        <item>包皮过长</item>
+        <item>前列腺炎</item>
+        <item>眼病</item>
+        <item>骨科</item>
+        <item>勃起障碍</item>
+        <item>早泄</item>
+        <item>皮肤病</item>
+        <item>男性不育症</item>
+    </string-array>
+</resources>

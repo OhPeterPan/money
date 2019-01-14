@@ -66,7 +66,7 @@
         android:layout_height="1dp"
         android:background="@color/eee" />
 
-    <com.zrdb.director.custom_view.InnerSwipeRefreshLayout
+    <com.zrdb.app.custom_view.InnerSwipeRefreshLayout
         android:id="@id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,5 +78,5 @@
             android:layout_height="match_parent"
             android:background="@color/eee"
             android:overScrollMode="never" />
-    </com.zrdb.director.custom_view.InnerSwipeRefreshLayout>
+    </com.zrdb.app.custom_view.InnerSwipeRefreshLayout>
 </LinearLayout>
