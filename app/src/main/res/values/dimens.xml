@@ -4,6 +4,7 @@
     <dimen name="mainPadding">6dp</dimen>
     <dimen name="toolbarHeight">45dp</dimen>
     <dimen name="overlapTop">30dp</dimen>
+    <dimen name="overlapDocTop">95dp</dimen>
     <dimen name="titleSize">14sp</dimen>
     <dimen name="titleRightSize">11sp</dimen>
     <dimen name="titleRightTopBottom">12sp</dimen>
@@ -28,4 +29,5 @@
     <dimen name="lookDocTextSize">12sp</dimen>
     <dimen name="lookDocDrawablePadding">6dp</dimen>
     <dimen name="directorSize">55dp</dimen>
+    <dimen name="directorDetailSize">45dp</dimen>
 </resources>

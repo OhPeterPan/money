@@ -21,6 +21,7 @@ public class ApiUtils {
     public static final String GET_DOC_LIST_URL = "Doctor/getlist?client_id=" + clientId + "&client_token=";
     public static final String GET_DOC_FILTER_URL = "Doctor/filter?client_id=" + clientId + "&client_token=";
     public static final String GET_DISEASE_URL = "Doctor/getdisease?client_id=" + clientId + "&client_token=";
+    public static final String LOOK_DOC_DETAIL_URL = "Doctor/details?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;

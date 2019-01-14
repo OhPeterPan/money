@@ -20,4 +20,5 @@
     <item name="llRank" type="id" />
     <item name="tvRank" type="id" />
     <item name="ivRank" type="id" />
+    <item name="llRoot" type="id" />
 </resources>

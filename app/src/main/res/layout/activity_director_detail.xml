@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/llRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/eee">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/ic_doc_detail_top">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_white_back" />
+
+                <TextView
+                    android:id="@id/tvActTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="首页"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/titleSize" />
+
+                <ImageView
+                    android:id="@id/ivToolbarRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_white_menu" />
+            </android.support.v7.widget.Toolbar>
+        </FrameLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="45dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="@dimen/firstItemElevation"
+            app:cardPreventCornerOverlap="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civDocInfoPic"
+                        android:layout_width="@dimen/directorSize"
+                        android:layout_height="@dimen/directorSize"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_doc_head" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="6dp">
+
+                        <TextView
+                            android:id="@+id/tvDirectorName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:text="名字" />
+
+                        <TextView
+                            android:id="@+id/tvDirectorOffice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_toRightOf="@id/tvDirectorName"
+                            android:textColor="#060606"
+                            android:textSize="12sp"
+                            tools:text="科室" />
+
+                        <TextView
+                            android:id="@+id/tvDocProfessor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_toRightOf="@id/tvDirectorOffice"
+                            android:textColor="#060606"
+                            android:textSize="12sp"
+                            tools:text="职称" />
+
+                        <TextView
+                            android:id="@+id/tvDocPlaceHos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvDirectorName"
+                            android:layout_marginTop="6dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="@color/textYellow"
+                            android:textSize="13sp"
+                            tools:text="所在医院" />
+
+                        <TextView
+                            android:id="@+id/tvDocHosScale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvDirectorName"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_toRightOf="@id/tvDocPlaceHos"
+                            android:background="@drawable/shape_yellow_bg"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            tools:text="三级甲等" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:alpha="0.3"
+                    android:background="@color/textYellow" />
+
+                <TextView
+                    android:id="@+id/tvAdapterDocGood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="3dp"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:textColor="#565656"
+                    android:textSize="12sp"
+                    tools:text="擅长大厦款到发货礼金卡婚纱礼服哈萨克了" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:alpha="0.3"
+                    android:background="@color/textYellow" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDocInfoPercent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingBottom="6dp"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="6dp"
+                        android:textColor="@color/standardTextColor"
+                        android:textSize="13sp"
+                        tools:text="接 诊 率" />
+
+                    <TextView
+                        android:id="@+id/tvDocDetailSerNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingBottom="6dp"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="6dp"
+                        android:text=""
+                        android:textColor="@color/standardTextColor"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="医生简介"
+                    android:textColor="@color/standardTextColor"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvDocReplyPercent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:padding="12dp"
+                    android:textColor="@color/standardTextColor"
+                    android:textSize="11sp"
+                    tools:text="回复率" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/eee" />
+
+            <TextView
+                android:id="@+id/tvDocDetailRank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="6dp"
+                android:text=""
+                android:textColor="@color/textYellow"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tvDocDetailExcels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="2dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:text=""
+                android:textColor="@color/standardTextColor"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <com.ms.square.android.expandabletextview.ExpandableTextView
+                android:id="@+id/expand_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="vertical"
+                app:animAlphaStart="1"
+                app:maxCollapsedLines="10">
+
+                <TextView
+                    android:id="@id/expandable_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textColor="@color/standardTextColor"
+                    android:textSize="12sp" />
+
+                <ImageButton
+                    android:id="@id/expand_collapse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp" />
+            </com.ms.square.android.expandabletextview.ExpandableTextView>
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@color/eee" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp">
+
+        <TextView
+            android:id="@+id/tvDocCustomService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/ic_custom_service"
+            android:gravity="center"
+            android:text="名医助手"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDocApply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/shape_dark_blue_full_bg"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="立即申请名医问诊"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

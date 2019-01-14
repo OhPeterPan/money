@@ -29,15 +29,15 @@ public class DirectorAdapter extends BaseQuickAdapter<DirectorBean, BaseViewHold
         helper.setText(R.id.tvAdapterHosScale, item.lev_name);
         helper.setText(R.id.tvAdapterPlaceHos, item.hos_name);
 
-        helper.setText(R.id.tvAdapterDocGood, item.excels);
+        helper.setText(R.id.tvAdapterDocGood, String.format("擅长：%s", item.excels));
         helper.setText(R.id.tvAdapterDocPrice, String.format("¥ %s", item.money));
-        shakeRound(helper, String.format("接诊率：%s%%", item.round));
+        shakeRound(helper, String.format("服务人数：%s", item.round));
     }
 
     private void shakeRound(BaseViewHolder helper, String str) {
         SpannableString sp = new SpannableString(str);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#363636"));
         sp.setSpan(colorSpan, 0, 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        helper.setText(R.id.tvAdapterVaccinatePercent, sp);
+        helper.setText(R.id.tvAdapterServiceNumber, sp);
     }
 }

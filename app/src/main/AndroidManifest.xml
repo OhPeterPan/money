@@ -64,6 +64,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".ui.director.LookDirectorActivity" />
         <activity android:name=".ui.director.DirectorDetailActivity" />
+        <activity android:name=".ui.director.DirectorInfoActivity" />
 
     </application>
 

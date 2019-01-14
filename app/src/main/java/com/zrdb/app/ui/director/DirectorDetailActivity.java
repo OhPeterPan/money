@@ -1,5 +1,6 @@
 package com.zrdb.app.ui.director;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -21,6 +22,7 @@ import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.CateListBean;
 import com.zrdb.app.ui.bean.CityBean;
 import com.zrdb.app.ui.bean.DirectorBean;
+import com.zrdb.app.ui.bean.DiseaseBean;
 import com.zrdb.app.ui.bean.DocFilterBean;
 import com.zrdb.app.ui.bean.LevelListBean;
 import com.zrdb.app.ui.bean.LoginBean;
@@ -41,7 +43,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter> implements IDirectorDetailView, BaseQuickAdapter.RequestLoadMoreListener, DocFilterPopupWindow.OnChooseFilterInfoListener, AddressPopupWindow.OnChooseAddressListener {
+public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter> implements IDirectorDetailView, BaseQuickAdapter.RequestLoadMoreListener, DocFilterPopupWindow.OnChooseFilterInfoListener, AddressPopupWindow.OnChooseAddressListener, TecPopupWindow.OnChooseSecListener, BaseQuickAdapter.OnItemClickListener {
     @BindView(R.id.tvActTitle)
     TextView tvActTitle;
     @BindView(R.id.ivToolbarRight)
@@ -87,6 +89,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
     private DocFilterPopupWindow docFilterPopupWindow;
     private String oldSecId = "0";
     private List<SecListBean> secList;
+    private TecPopupWindow tecPopupWindow;
 
     @Override
     protected int getLayoutId() {
@@ -115,6 +118,15 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter ada, View view, int position) {
+        DirectorBean directorBean = adapter.getItem(position);
+        if (directorBean != null)
+            startIntentActivity(new Intent().putExtra(ParamUtils.DOC_ID, directorBean.doc_id)
+                    .putExtra(ParamUtils.SEC_NAME, tvActTitle.getText()), DirectorInfoActivity.class);
     }
 
     private void sendNet(boolean showDialog) {
@@ -122,12 +134,14 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
             curPage = 1;
             isRefresh = true;
         }
+        LogUtil.LogI("参数："
+                + secId + "::" + disId + "::" + areaId + "::" + tecId + "::" + cateId + "::" + levId);
         presenter.sendNetGetDoc(account.token, account.uid, secId, disId, areaId, tecId, cateId, levId, curPage, showDialog);
     }
 
     @Override
     public void getDocListResultSuccess(String result) {
-        //LogUtil.logResult("找主任", result);
+        LogUtil.logResult("找主任", result);
         if (curPage == 1)
             recyclerView.smoothScrollToPosition(0);
         initPage(result);
@@ -188,8 +202,9 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
     protected void innerListener(View v) {
         switch (v.getId()) {
             case R.id.llAddress://地址
+                tag = 0;
                 if (provinceList == null || provinceList.size() == 0 || !StringUtils.equals(oldSecId, secId)) {
-                    tag = 0;
+
                     presenter.sendNetDocFilter(account.token, account.uid, secId);
                 } else {
                     showAddressPopupWindow();
@@ -197,18 +212,17 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
 
                 break;
             case R.id.llTechnical://科室
-
+                tag = 2;
                 if (secList == null || secList.size() == 0) {
-                    tag = 2;
-                    presenter.sendNetDocFilter(account.token, account.uid, secId);
+                    presenter.sendNetDocFilter(account.token, account.uid, secId);//互不干扰?
                 } else {
                     showTechnicalPopupWindow();
                 }
 
                 break;
             case R.id.llRank://筛选
+                tag = 1;
                 if (tecList == null || tecList.size() == 0 || !StringUtils.equals(oldSecId, secId)) {
-                    tag = 1;
                     presenter.sendNetDocFilter(account.token, account.uid, secId);
                 } else {
                     showFilterPopupWindow();
@@ -220,7 +234,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
 
     @Override
     public void getDocFilterSuccess(String result) {
-        // LogUtil.logResult("过滤", result);
+        LogUtil.logResult("过滤", result);
         this.docFilterInfo = result;
         DocFilterResponse response = Convert.fromJson(result, DocFilterResponse.class);
         DocFilterBean filterBean = response.data;
@@ -229,14 +243,18 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         List<LevelListBean> levelList = filterBean.level_list;
         List<CateListBean> cateList = filterBean.cate_list;
         List<SecListBean> secList = filterBean.sec_list;
-        this.provinceList = provinceList;
-        this.tecList = tecList;
-        this.secList = secList;
+        if (provinceList != null && provinceList.size() != 0)
+            this.provinceList = provinceList;
+        if (tecList != null && tecList.size() != 0)
+            this.tecList = tecList;
+        if (secList != null && secList.size() != 0)
+            this.secList = secList;
 /*        this.levelList = levelList;
         this.cateList = cateList;*/
         if (!StringUtils.equals(oldSecId, secId)) {
             popupWindow = null;
             docFilterPopupWindow = null;
+            tecPopupWindow = null;
         }
         if (tag == 0) {
             if (provinceList != null && provinceList.size() != 0) {
@@ -255,10 +273,43 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         oldSecId = secId;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (tecPopupWindow != null) {
+            tecPopupWindow.destroy();
+        }
+    }
+
+    // TODO: 2019/1/14 操作逻辑不明
     private void showTechnicalPopupWindow() {
-        TecPopupWindow tecPopupWindow = new TecPopupWindow(this, secList);
+        if (tecPopupWindow == null) {
+            tecPopupWindow = new TecPopupWindow(this, secList, secId);
+            tecPopupWindow.setOnChooseSecListener(this);
+            tecPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    tvTechnical.setTextColor(UIUtil.getColor(R.color.standardTextColor));
+                    ivTechnical.setImageResource(R.drawable.ic_gray_choose_normal);
+                }
+            });
+        }
+
+        if (!tecPopupWindow.isShowing()) {
+            tvTechnical.setTextColor(UIUtil.getColor(R.color.colorPrimary));
+            ivTechnical.setImageResource(R.drawable.ic_blue_choose_normal);
+        }
 
         tecPopupWindow.show(llTechnical, Gravity.LEFT | Gravity.TOP, 0, 0);
+    }
+
+    @Override
+    public void getSecInfo(SecListBean secBean, DiseaseBean bean) {
+        this.secId = secBean.sec_id;
+        this.disId = bean.dis_id;
+
+        tvTechnical.setText(secBean.name);
+        sendNet(true);
     }
 
     private void showFilterPopupWindow() {
@@ -289,7 +340,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
     }
 
     private void showAddressPopupWindow() {
-        LogUtil.LogI("长度：" + provinceList.size());
+        //  LogUtil.LogI("长度：" + provinceList.size());
         if (popupWindow == null) {
             popupWindow = new AddressPopupWindow(this, provinceList);
             popupWindow.setOnChooseAddressListener(this);
