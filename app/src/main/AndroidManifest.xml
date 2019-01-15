@@ -70,6 +70,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".ui.common.SchemeActivity" />
         <activity android:name=".ui.hospital.LookHosIndexActivity" />
+        <activity android:name=".ui.hospital.HosDetailActivity" />
 
     </application>
 

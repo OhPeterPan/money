@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivMulAdapterHosPic"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="95dp"
+        android:layout_height="55dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_placeholder" />
 
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvAdapterMulHosName"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/shape_yellow"
             android:paddingBottom="2dp"
             android:paddingLeft="15dp"

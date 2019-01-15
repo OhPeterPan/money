@@ -20,6 +20,13 @@ public class LookHosIndexPresenter extends BasePresenter<ILookHosIndexView> impl
             model.sendNetGetHosListResult(token, uid, areaId, levId, String.valueOf(curPage), this);
     }
 
+    public void sendNetDocFilter(String token, String uid) {
+        if (mView != null)
+            mView.showLoading();
+        if (model != null)
+            model.sendNetHosFilter(token, uid, this);
+    }
+
     @Override
     public void getHosListResult(String result) {
         if (!checkResultError(result)) {

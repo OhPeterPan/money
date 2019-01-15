@@ -127,7 +127,6 @@ public class HospitalFrag extends LazyFragment<SearchHosPresenter> implements IS
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.llFragHosAddress://选择地址
-
                 if (provinceList == null || provinceList.size() == 0) {
                     tag = 0;
                     initLoadDialog();
@@ -174,7 +173,7 @@ public class HospitalFrag extends LazyFragment<SearchHosPresenter> implements IS
     }
 
     private void showAddressPopupWindow() {
-        LogUtil.LogI("长度：" + provinceList.size());
+        //LogUtil.LogI("长度：" + provinceList.size());
         if (popupWindow == null) {
             popupWindow = new AddressPopupWindow(getActivity(), provinceList);
             popupWindow.setOnChooseAddressListener(this);

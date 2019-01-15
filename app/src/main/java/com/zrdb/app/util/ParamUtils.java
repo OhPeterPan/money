@@ -8,4 +8,5 @@ public class ParamUtils {
     public static final String DOC_ID = "docId";
     public static final String URL = "url";
     public static final String TITLE_NAME = "titleName";
+    public static final String HOS_ID = "hosId";
 }

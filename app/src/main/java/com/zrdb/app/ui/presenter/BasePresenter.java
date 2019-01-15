@@ -64,4 +64,5 @@ public abstract class BasePresenter<T extends IView> {
         if (mView != null)
             mView = null;
     }
+
 }
