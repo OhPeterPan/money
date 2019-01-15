@@ -20,6 +20,9 @@
     <item name="llRank" type="id" />
     <item name="tvRank" type="id" />
     <item name="ivRank" type="id" />
+    <item name="llSec" type="id" />
+    <item name="tvSec" type="id" />
+    <item name="ivSec" type="id" />
     <item name="llRoot" type="id" />
     <item name="tvScheme" type="id" />
 </resources>

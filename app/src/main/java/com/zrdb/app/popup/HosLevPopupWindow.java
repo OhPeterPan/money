@@ -21,13 +21,13 @@ public class HosLevPopupWindow extends BaseListPopupWindow<LevelListBean> {
     @Override
     protected void binderAdapter(BaseViewHolder helper, LevelListBean item) {
         helper.setText(R.id.tvAdapterHosLev, item.name);
-        helper.setChecked(R.id.cbAdapterHosLev, item.isChoose);
+        //helper.setChecked(R.id.cbAdapterHosLev, item.isChoose);
     }
 
     @Override
     protected void onItemListener(LevelListBean levelListBean, int position) {
-        setChoosePosition(position);
-        getAdapter().notifyDataSetChanged();
+   /*     setChoosePosition(position);
+        getAdapter().notifyDataSetChanged();*/
         if (listener != null) listener.chooseHosLevListener(levelListBean, position);
         dismiss();
     }

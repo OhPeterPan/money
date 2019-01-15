@@ -22,5 +22,6 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:focusable="false"
-        android:padding="6dp" />
+        android:padding="6dp"
+        android:visibility="gone" />
 </LinearLayout>

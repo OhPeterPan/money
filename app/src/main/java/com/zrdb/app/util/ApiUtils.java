@@ -28,6 +28,8 @@ public class ApiUtils {
     public static final String LOOK_HOS_FILTER_URL = "Hospital/filter?client_id=" + clientId + "&client_token=";
     public static final String GET_HOS_DETAIL_URL = "Hospital/details?client_id=" + clientId + "&client_token=";
     public static final String GET_HOS_DOC_URL = "Hospital/doctorlist?client_id=" + clientId + "&client_token=";
+    public static final String SUBSCRIBE_HOS_INFO_URL = "Hospital/subscribe?client_id=" + clientId + "&client_token=";
+    public static final String SUBSCRIBE_HOS_PERSON_INFO_URL = "Hospital/subscribe_send?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;

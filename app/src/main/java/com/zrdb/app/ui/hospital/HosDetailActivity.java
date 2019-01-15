@@ -1,11 +1,16 @@
 package com.zrdb.app.ui.hospital;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,8 +18,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.zrdb.app.R;
 import com.zrdb.app.adapter.SearchDocAdapter;
-import com.zrdb.app.custom_view.ScrollRecyclerView;
 import com.zrdb.app.image_loader.ImageLoader;
+import com.zrdb.app.popup.HosSecPopupWindow;
+import com.zrdb.app.popup.HosTecPopupWindow;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.HosDetailBean;
 import com.zrdb.app.ui.bean.HospitalInfoBean;
@@ -32,18 +38,58 @@ import com.zrdb.app.util.LogUtil;
 import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
 import com.zrdb.app.util.ToastUtil;
+import com.zrdb.app.util.UIUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implements IHosDetailView, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener {
+public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implements IHosDetailView, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, HosSecPopupWindow.IOnChooseSecListener, HosTecPopupWindow.IOnChooseTecListener {
     @BindView(R.id.tvActTitle)
     TextView tvActTitle;
     @BindView(R.id.ivToolbarRight)
     ImageView ivToolbarRight;
+
     @BindView(R.id.recyclerView)
-    ScrollRecyclerView recyclerView;
+    RecyclerView recyclerView;
+    @BindView(R.id.back)
+    ImageView back;
+    @BindView(R.id.tvActRightTitle)
+    TextView tvActRightTitle;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.ivHosDetailPic)
+    ImageView ivHosDetailPic;
+    @BindView(R.id.tvHosDetailName)
+    TextView tvHosDetailName;
+    @BindView(R.id.tvHosDetailLev)
+    TextView tvHosDetailLev;
+    @BindView(R.id.tvHosDetailCate)
+    TextView tvHosDetailCate;
+    @BindView(R.id.tvHosDetailAddress)
+    TextView tvHosDetailAddress;
+    @BindView(R.id.expandable_text)
+    TextView expandableText;
+    @BindView(R.id.expand_collapse)
+    ImageButton expandCollapse;
+    @BindView(R.id.expand_text_view)
+    ExpandableTextView expandTextView;
+    @BindView(R.id.tvHosDocSec)
+    TextView tvHosDocSec;
+    @BindView(R.id.tvHosApply)
+    TextView tvHosApply;
+    @BindView(R.id.ivHosDocSec)
+    ImageView ivHosDocSec;
+    @BindView(R.id.llHosDocSec)
+    LinearLayout llHosDocSec;
+    @BindView(R.id.tvHosDocTec)
+    TextView tvHosDocTec;
+    @BindView(R.id.ivHosDocTec)
+    ImageView ivHosDocTec;
+    @BindView(R.id.llHosDocTec)
+    LinearLayout llHosDocTec;
+    @BindView(R.id.llHosHeadFilter)
+    LinearLayout llHosHeadFilter;
     private String hosId;
     private String tecId = "0";//等级
     private String secId = "0";//科室
@@ -51,18 +97,12 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
     private boolean isRefresh = true;
     private boolean hasMore;
     private LoginBean account;
-    private ImageView ivHosDetailPic;
-    private TextView tvHosDetailName;
-    private TextView tvHosDetailLev;
-    private TextView tvHosDetailCate;
-    private TextView tvHosDetailAddress;
-    private ExpandableTextView expandableText;
     private SearchDocAdapter adapter;
     private View headView;
     private List<SecListBean> secList;//科室
     private List<TecListBean> tecList;//等级
-    private LinearLayout llHosDocSec;
-    private LinearLayout llHosDocTec;
+    private HosSecPopupWindow secPopupWindow;
+    private HosTecPopupWindow tecPopupWindow;
 
     @Override
     protected int getLayoutId() {
@@ -82,24 +122,6 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
         sendNetHosDetail();
     }
 
-    private void initHeadView() {
-        headView = LayoutInflater.from(this).inflate(R.layout.view_hos_detail_head, recyclerView, false);
-        ivHosDetailPic = headView.findViewById(R.id.ivHosDetailPic);
-        tvHosDetailName = headView.findViewById(R.id.tvHosDetailName);
-        tvHosDetailLev = headView.findViewById(R.id.tvHosDetailLev);
-        tvHosDetailCate = headView.findViewById(R.id.tvHosDetailCate);
-        tvHosDetailAddress = headView.findViewById(R.id.tvHosDetailAddress);
-        expandableText = headView.findViewById(R.id.expand_text_view);
-        llHosDocSec = headView.findViewById(R.id.llHosDocSec);
-        llHosDocTec = headView.findViewById(R.id.llHosDocTec);
-        llHosDocSec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtil.showMessage("能响应吗", Toast.LENGTH_SHORT);
-            }
-        });
-    }
-
     private void initAdapter() {
         adapter = new SearchDocAdapter();
         adapter.setOnLoadMoreListener(this, recyclerView);
@@ -111,8 +133,8 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
     }
 
     @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        ToastUtil.showMessage("可以吗", Toast.LENGTH_SHORT);
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {//去医生详情
+        //ToastUtil.showMessage("可以吗", Toast.LENGTH_SHORT);
     }
 
     private void sendNetHosDetail() {
@@ -123,7 +145,7 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
     public void getHosDetailSuccess(String result) {
         LogUtil.logResult("医院详情", result);
         initAdapter();
-        initHeadView();
+        //initHeadView();
         DocDetailResponse response = Convert.fromJson(result, DocDetailResponse.class);
         HosDetailBean hosInfo = response.data;
         secList = hosInfo.sec_list;
@@ -136,7 +158,7 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
         tvHosDetailLev.setText(String.valueOf(hospitalInfo.lev_name));
         tvHosDetailCate.setText(String.valueOf(hospitalInfo.cate_name));
         tvHosDetailAddress.setText(String.valueOf(hospitalInfo.address));
-        expandableText.setText(Html.fromHtml(hospitalInfo.introduce));
+        expandTextView.setText(Html.fromHtml(hospitalInfo.introduce));
         sendNetDoc(true);
     }
 
@@ -160,6 +182,7 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
     }
 
     private void initPage(String result) {
+        if (recyclerView != null && curPage == 0) recyclerView.smoothScrollToPosition(0);
         curPage++;
         SearchDocResponse response = Convert.fromJson(result, SearchDocResponse.class);
         List<MultipleDocBean> docList = response.data;
@@ -183,9 +206,7 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
         if (!hasMore) {
             adapter.loadMoreEnd();
         }
-        if (adapter.getHeaderLayoutCount() == 0) {
-            adapter.addHeaderView(headView);
-        }
+
     }
 
     @Override
@@ -205,17 +226,90 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
 
     @Override
     protected void initListener() {
-
+        llHosDocSec.setOnClickListener(this);
+        llHosDocTec.setOnClickListener(this);
+        tvHosApply.setOnClickListener(this);
     }
 
     @Override
     protected void innerListener(View v) {
+        switch (v.getId()) {
+            case R.id.llHosDocSec://全部科室
+                if (secList != null && secList.size() != 0) {
+                    showSecPopupWindow();
+                } else {
+                    ToastUtil.showMessage("无科室数据！", Toast.LENGTH_SHORT);
+                }
+                break;
+            case R.id.llHosDocTec://医生等级
+                if (tecList != null && tecList.size() != 0) {
+                    showTecPopupWindow();
+                } else {
+                    ToastUtil.showMessage("无医生等级！", Toast.LENGTH_SHORT);
+                }
+                break;
+            case R.id.tvHosApply://立即预约
+                startIntentActivity(new Intent().putExtra(ParamUtils.HOS_ID, hosId), SubscribeHosActivity.class);
 
+                break;
+        }
+    }
+
+    private void showSecPopupWindow() {
+
+        if (secPopupWindow == null) {
+            secPopupWindow = new HosSecPopupWindow(this, secList, R.layout.adapter_hos_lev);
+            secPopupWindow.setOnChooseSecListener(this);
+            secPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    tvHosDocSec.setTextColor(UIUtil.getColor(R.color.standardTextColor));
+                    ivHosDocSec.setImageResource(R.drawable.ic_gray_choose_normal);
+                }
+            });
+        }
+        if (!secPopupWindow.isShowing()) {
+            tvHosDocSec.setTextColor(UIUtil.getColor(R.color.colorPrimary));
+            ivHosDocSec.setImageResource(R.drawable.ic_blue_choose_normal);
+        }
+        secPopupWindow.show(llHosDocSec, Gravity.LEFT | Gravity.TOP, 0, 0);
+    }
+
+    @Override
+    public void chooseHosSecListener(SecListBean bean, int position) {
+        secId = bean.sec_id;
+        tvHosDocSec.setText(bean.name);
+        sendNetDoc(true);
+    }
+
+    private void showTecPopupWindow() {
+        if (tecPopupWindow == null) {
+            tecPopupWindow = new HosTecPopupWindow(this, tecList, R.layout.adapter_hos_lev);
+            tecPopupWindow.setOnChooseTecListener(this);
+            tecPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    tvHosDocTec.setTextColor(UIUtil.getColor(R.color.standardTextColor));
+                    ivHosDocTec.setImageResource(R.drawable.ic_gray_choose_normal);
+                }
+            });
+        }
+        if (!tecPopupWindow.isShowing()) {
+            tvHosDocTec.setTextColor(UIUtil.getColor(R.color.colorPrimary));
+            ivHosDocTec.setImageResource(R.drawable.ic_blue_choose_normal);
+        }
+        tecPopupWindow.show(llHosDocTec, Gravity.LEFT | Gravity.TOP, 0, 0);
+    }
+
+    @Override
+    public void chooseHosTecListener(TecListBean bean, int position) {
+        tecId = bean.tec_id;
+        tvHosDocTec.setText(bean.name);
+        sendNetDoc(true);
     }
 
     @Override
     public void onLoadMoreRequested() {
         sendNetDoc(false);
     }
-
 }

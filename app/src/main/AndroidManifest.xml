@@ -71,6 +71,7 @@
         <activity android:name=".ui.common.SchemeActivity" />
         <activity android:name=".ui.hospital.LookHosIndexActivity" />
         <activity android:name=".ui.hospital.HosDetailActivity" />
+        <activity android:name=".ui.hospital.SubscribeHosActivity" />
 
     </application>
 
