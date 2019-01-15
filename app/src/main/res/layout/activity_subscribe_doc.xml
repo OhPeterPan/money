@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@id/llRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/eee"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:text="您现在预约的是:"
+                android:textColor="@color/standardTextColor"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="@dimen/firstItemElevation"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civSubDirectorPic"
+                        android:layout_width="@dimen/directorSize"
+                        android:layout_height="@dimen/directorSize"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_doc_head" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="6dp">
+
+                        <TextView
+                            android:id="@+id/tvSubDirectorName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="名字"
+                            android:textColor="@android:color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvSubDirectorOffice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_toRightOf="@id/tvSubDirectorName"
+                            android:text="科室"
+                            android:textColor="#060606"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvSubMulTitleProfessor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_toRightOf="@id/tvSubDirectorOffice"
+                            android:text="职称"
+                            android:textColor="#060606"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvSubHosScale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@id/tvSubDirectorName"
+                            android:layout_marginTop="6dp"
+                            android:text="三级甲等"
+                            android:textColor="@color/textYellow"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvSubPlaceHos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvSubDirectorName"
+                            android:layout_marginTop="6dp"
+                            android:layout_toLeftOf="@id/tvSubHosScale"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="所在医院"
+                            android:textColor="@color/textYellow"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="@dimen/firstItemElevation"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
+                        android:text="填写信息完成预约"
+                        android:textColor="@color/textHintColor"
+                        android:textSize="11sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/eee" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="姓名"
+                            android:textColor="@color/standardTextColor"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/etSubInputName"
+                            style="@style/editStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.5"
+                            android:background="@null"
+                            android:hint="请输入你的名字"
+                            android:textColor="@color/standardTextColor"
+                            android:textColorHint="@color/textHintColor"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/eee" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="手机号码"
+                            android:textColor="@color/standardTextColor"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/etSubInputPhone"
+                            style="@style/editStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.5"
+                            android:background="@null"
+                            android:hint="请输入你的手机号码"
+                            android:inputType="phone"
+                            android:textColor="@color/standardTextColor"
+                            android:textColorHint="@color/textHintColor"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/eee" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:paddingBottom="12dp"
+                            android:paddingTop="12dp"
+                            android:text="确诊疾病"
+                            android:textColor="@color/standardTextColor"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/etSubInputDisease"
+                            style="@style/editStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.5"
+                            android:background="@null"
+                            android:hint="请输入您已确诊的疾病名称"
+                            android:textColor="@color/standardTextColor"
+                            android:textColorHint="@color/textHintColor"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/eee" />
+
+                    <TextView
+                        android:id="@+id/tvSubDocPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="120dp"
+                        android:paddingTop="6dp"
+                        android:textColor="#a1a1a1"
+                        android:textSize="11sp"
+                        tools:text="医生助理会联系您的手机：" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cbSubServiceScheme"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="您已同意"
+                            android:textColor="#959394"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@id/tvScheme"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="主任当班服务协议"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btnSubscribeSubmitHerd"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/shape_login"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

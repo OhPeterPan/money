@@ -6,10 +6,42 @@
 
     <include layout="@layout/toolbar_layout" />
 
-    <View
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/eee" />
+        android:layout_height="wrap_content"
+        android:background="@color/grayBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_circle_white"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search" />
+
+            <TextView
+                android:id="@+id/tvHosSearch"
+                style="@style/editStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:background="@null"
+                android:hint="搜索疾病、医生或医院"
+                android:imeOptions="actionSearch"
+                android:includeFontPadding="false"
+                android:padding="6dp"
+                android:singleLine="true"
+                android:textColor="#616161"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +50,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@id/llAddress"
+            android:id="@+id/llHosAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,7 +59,7 @@
             android:padding="12dp">
 
             <TextView
-                android:id="@id/tvAddress"
+                android:id="@+id/tvHosAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="全国"
@@ -35,7 +67,7 @@
                 android:textSize="13sp" />
 
             <ImageView
-                android:id="@id/ivAddress"
+                android:id="@+id/ivHosAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
@@ -50,7 +82,7 @@
             android:background="@color/eee" />
 
         <LinearLayout
-            android:id="@id/llTechnical"
+            android:id="@+id/llHosLev"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,49 +91,15 @@
             android:padding="12dp">
 
             <TextView
-                android:id="@id/tvTechnical"
+                android:id="@+id/tvHosLev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="全部科室"
+                android:text="医院级别"
                 android:textColor="@color/standardTextColor"
                 android:textSize="13sp" />
 
             <ImageView
-                android:id="@id/ivTechnical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:src="@drawable/ic_gray_choose_normal" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/eee" />
-
-        <LinearLayout
-            android:id="@id/llRank"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <TextView
-                android:id="@id/tvRank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="筛选"
-                android:textColor="@color/standardTextColor"
-                android:textSize="13sp" />
-
-            <ImageView
-                android:id="@id/ivRank"
+                android:id="@+id/ivHosLev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
@@ -114,18 +112,10 @@
         android:layout_height="1dp"
         android:background="@color/eee" />
 
-    <com.zrdb.app.custom_view.InnerSwipeRefreshLayout
-        android:id="@id/swipeRefresh"
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/eee"
-            android:overScrollMode="never"
-            android:padding="6dp" />
-    </com.zrdb.app.custom_view.InnerSwipeRefreshLayout>
+        android:background="@color/eee"
+        android:overScrollMode="never" />
 </LinearLayout>

@@ -30,6 +30,7 @@ import com.zrdb.app.ui.bean.IndexBean;
 import com.zrdb.app.ui.bean.IndexListBean;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.director.LookDirectorActivity;
+import com.zrdb.app.ui.hospital.LookHosIndexActivity;
 import com.zrdb.app.ui.presenter.MainPresenter;
 import com.zrdb.app.ui.response.MainResponse;
 import com.zrdb.app.ui.viewImpl.IMainView;
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     private FollowUpAdapter followUpAdapter;
     private Banner banner;
     private IBanner bannerImpl;
-    private LinearLayout llMainHeadIntelligentVisit;
+    private LinearLayout llMainHeadIntelligentVisit, llMainLookHos;
     private LinearLayout llMainLookDirector;
 
     @Override
@@ -103,12 +104,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         headView = LayoutInflater.from(this).inflate(R.layout.view_main_head, recyclerView, false);
         horizontalRecyclerView = headView.findViewById(R.id.horizontalRecyclerView);
         llMainHeadIntelligentVisit = headView.findViewById(R.id.llMainHeadIntelligentVisit);
+        llMainLookHos = headView.findViewById(R.id.llMainLookHos);
         llMainLookDirector = headView.findViewById(R.id.llMainLookDirector);
         banner = headView.findViewById(R.id.banner);
         initFollowAdapter();
-        adapter.addHeaderView(headView);
+
         llMainHeadIntelligentVisit.setOnClickListener(this);
         llMainLookDirector.setOnClickListener(this);
+        llMainLookHos.setOnClickListener(this);
     }
 
     private void initFollowAdapter() {
@@ -150,7 +153,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 startIntentActivity(new Intent(), IntelligentVisitActivity.class);
                 break;
             case R.id.llMainLookDirector://找主任
-                startIntentActivity(new Intent(),LookDirectorActivity.class);
+                startIntentActivity(new Intent(), LookDirectorActivity.class);
+                break;
+            case R.id.llMainLookHos://找医院
+                startIntentActivity(new Intent(), LookHosIndexActivity.class);
                 break;
         }
     }
@@ -166,6 +172,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             followUpAdapter.setNewData(indexBean.middle_slider);
             tvMainService.setVisibility(View.VISIBLE);
             setBanner(topSlider);
+            if (adapter.getHeaderLayoutCount() == 0) {
+                adapter.addHeaderView(headView);
+            }
         } else {
             ToastUtil.showMessage(String.valueOf(mainResponse.msg), Toast.LENGTH_SHORT);
         }

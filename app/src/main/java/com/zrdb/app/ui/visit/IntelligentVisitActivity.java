@@ -1,5 +1,6 @@
 package com.zrdb.app.ui.visit;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -28,12 +29,14 @@ import com.zrdb.app.image_loader.ImageLoader;
 import com.zrdb.app.imagecompress.ImageCompress;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.LoginBean;
+import com.zrdb.app.ui.common.SchemeActivity;
 import com.zrdb.app.ui.presenter.IntelligentPresenter;
 import com.zrdb.app.ui.response.StrResponse;
 import com.zrdb.app.ui.viewImpl.IIntelligentView;
 import com.zrdb.app.util.ApiUtils;
 import com.zrdb.app.util.Convert;
 import com.zrdb.app.util.LogUtil;
+import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
 import com.zrdb.app.util.ToastUtil;
 import com.zrdb.app.util.UIUtil;
@@ -156,7 +159,9 @@ public class IntelligentVisitActivity extends BaseActivity<IntelligentPresenter>
     protected void innerListener(View v) {
         switch (v.getId()) {
             case R.id.tvSchemeDetail://服务协议
-
+                startIntentActivity(new Intent().putExtra(ParamUtils.TITLE_NAME, "服务协议").putExtra(ParamUtils.URL, ApiUtils.Config.SERVICE_SCHEME_URL),
+                        SchemeActivity.class
+                );
                 break;
             case R.id.ivIntelChooseHerdPic://选择图片
                 chooseImage(true);

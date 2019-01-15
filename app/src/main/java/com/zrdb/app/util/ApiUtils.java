@@ -22,6 +22,10 @@ public class ApiUtils {
     public static final String GET_DOC_FILTER_URL = "Doctor/filter?client_id=" + clientId + "&client_token=";
     public static final String GET_DISEASE_URL = "Doctor/getdisease?client_id=" + clientId + "&client_token=";
     public static final String LOOK_DOC_DETAIL_URL = "Doctor/details?client_id=" + clientId + "&client_token=";
+    public static final String SUBSCRIBE_DOC_INFO_URL = "Doctor/subscribe?client_id=" + clientId + "&client_token=";
+    public static final String SUBSCRIBE_PERSON_INFO_URL = "Doctor/subscribe_send?client_id=" + clientId + "&client_token=";
+    public static final String LOOK_HOS_URL = "Hospital/getlist?client_id=" + clientId + "&client_token=";
+    public static final String LOOK_HOS_FILTER_URL = "Hospital/filter?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;
@@ -31,6 +35,7 @@ public class ApiUtils {
         private static final String RELEASE_URL = "http://zrdb.vipwfx.cn/api.php/";
         private static final String DEBUG_PHONE = "15638505561";
         private static final String DEBUG_PWD = "123456";
+        public static final String SERVICE_SCHEME_URL = "http://zrdb.vipwfx.cn/index/contract?id=1";
         private static String dimen = RELEASE_URL;
         private static boolean isDebug = true;
 

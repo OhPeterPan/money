@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zrdb.app.R;
 import com.zrdb.app.adapter.DirectorAdapter;
@@ -203,9 +202,9 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         switch (v.getId()) {
             case R.id.llAddress://地址
                 tag = 0;
-                if (provinceList == null || provinceList.size() == 0 || !StringUtils.equals(oldSecId, secId)) {
+                if (provinceList == null || provinceList.size() == 0) {
 
-                    presenter.sendNetDocFilter(account.token, account.uid, secId);
+                    presenter.sendNetDocFilter(account.token, account.uid, oldSecId);//secId  直接默认为0
                 } else {
                     showAddressPopupWindow();
                 }
@@ -214,7 +213,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
             case R.id.llTechnical://科室
                 tag = 2;
                 if (secList == null || secList.size() == 0) {
-                    presenter.sendNetDocFilter(account.token, account.uid, secId);//互不干扰?
+                    presenter.sendNetDocFilter(account.token, account.uid, oldSecId);//互不干扰?
                 } else {
                     showTechnicalPopupWindow();
                 }
@@ -222,8 +221,8 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
                 break;
             case R.id.llRank://筛选
                 tag = 1;
-                if (tecList == null || tecList.size() == 0 || !StringUtils.equals(oldSecId, secId)) {
-                    presenter.sendNetDocFilter(account.token, account.uid, secId);
+                if (tecList == null || tecList.size() == 0) {
+                    presenter.sendNetDocFilter(account.token, account.uid, oldSecId);
                 } else {
                     showFilterPopupWindow();
                 }
@@ -251,11 +250,11 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
             this.secList = secList;
 /*        this.levelList = levelList;
         this.cateList = cateList;*/
-        if (!StringUtils.equals(oldSecId, secId)) {
+   /*     if (!StringUtils.equals(oldSecId, secId)) {
             popupWindow = null;
             docFilterPopupWindow = null;
             tecPopupWindow = null;
-        }
+        }*/
         if (tag == 0) {
             if (provinceList != null && provinceList.size() != 0) {
                 showAddressPopupWindow();
@@ -270,7 +269,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
                 showFilterPopupWindow();
             }
         }
-        oldSecId = secId;
+        //oldSecId = secId;
     }
 
     @Override
@@ -281,7 +280,6 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         }
     }
 
-    // TODO: 2019/1/14 操作逻辑不明
     private void showTechnicalPopupWindow() {
         if (tecPopupWindow == null) {
             tecPopupWindow = new TecPopupWindow(this, secList, secId);
@@ -308,7 +306,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         this.secId = secBean.sec_id;
         this.disId = bean.dis_id;
 
-        tvTechnical.setText(secBean.name);
+        tvTechnical.setText(bean.name);
         sendNet(true);
     }
 

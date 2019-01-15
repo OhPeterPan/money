@@ -65,6 +65,11 @@
         <activity android:name=".ui.director.LookDirectorActivity" />
         <activity android:name=".ui.director.DirectorDetailActivity" />
         <activity android:name=".ui.director.DirectorInfoActivity" />
+        <activity
+            android:name=".ui.director.SubscribeDocActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.common.SchemeActivity" />
+        <activity android:name=".ui.hospital.LookHosIndexActivity" />
 
     </application>
 

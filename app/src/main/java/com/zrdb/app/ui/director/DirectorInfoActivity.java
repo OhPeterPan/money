@@ -1,5 +1,6 @@
 package com.zrdb.app.ui.director;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Html;
@@ -103,12 +104,16 @@ public class DirectorInfoActivity extends BaseActivity<DirectorInfoPresenter> im
 
     @Override
     protected void initListener() {
-
+        tvDocApply.setOnClickListener(this);
     }
 
     @Override
     protected void innerListener(View v) {
-
+        switch (v.getId()) {
+            case R.id.tvDocApply://预约医生
+                startIntentActivity(new Intent().putExtra(ParamUtils.DOC_ID, docId), SubscribeDocActivity.class);
+                break;
+        }
     }
 
     @Override
