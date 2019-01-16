@@ -34,16 +34,18 @@ public class ApiUtils {
     public static final String USER_INFO_URL = "User/userinfo?client_id=" + clientId + "&client_token=";
     public static final String CHANGE_USER_INFO_URL = "User/editinfo?client_id=" + clientId + "&client_token=";
     public static final String BESPOKE_LIST_URL = "Subscribelist/index?client_id=" + clientId + "&client_token=";
+    public static final String GET_BESPOKE_DETAIL_URL = "Subscribelist/get_details?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;
-        public static final String WX_APP_ID = "wx769f48a543df8774";
+        public static final String WX_APP_ID = "wxe6fde7f9414981b9";
         private static final String DEBUG_URL = "http://zrdb.vipwfx.cn/api.php/";
         private static final String IMAGE_BASE_URL = "http://zrdb.vipwfx.cn";
         private static final String RELEASE_URL = "http://zrdb.vipwfx.cn/api.php/";
         private static final String DEBUG_PHONE = "15638505561";
         private static final String DEBUG_PWD = "123456";
         public static final String SERVICE_SCHEME_URL = "http://zrdb.vipwfx.cn/index/contract?id=1";
+        public static final String COMMON_QUESTION_URL = "http://zrdb.vipwfx.cn/index/problem";
         private static String dimen = RELEASE_URL;
         private static boolean isDebug = true;
 

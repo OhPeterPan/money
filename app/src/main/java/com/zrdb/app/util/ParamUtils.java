@@ -9,4 +9,6 @@ public class ParamUtils {
     public static final String URL = "url";
     public static final String TITLE_NAME = "titleName";
     public static final String HOS_ID = "hosId";
+    public static final String SUB_ID = "subId";
+    public static final String TYPE = "type";
 }

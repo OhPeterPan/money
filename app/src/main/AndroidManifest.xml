@@ -75,6 +75,16 @@
         <activity android:name=".ui.me.MeMeanActivity" />
         <activity android:name=".ui.me.UserInfoActivity" />
         <activity android:name=".ui.me.MeBespokeActivity" />
+        <activity android:name=".ui.me.BespokeDetailActivity" />
+        <activity android:name=".ui.card.BuyCardActivity" />
+        <activity android:name=".ui.card.CardExhibitionActivity" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:theme="@style/wxEntry" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true" />
 
     </application>
 

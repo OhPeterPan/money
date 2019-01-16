@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zrdb.app.R;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.LoginBean;
@@ -19,6 +22,7 @@ import com.zrdb.app.ui.bean.LoginResponse;
 import com.zrdb.app.ui.main.MainActivity;
 import com.zrdb.app.ui.presenter.LoginPresenter;
 import com.zrdb.app.ui.viewImpl.ILoginView;
+import com.zrdb.app.util.ApiUtils;
 import com.zrdb.app.util.Convert;
 import com.zrdb.app.util.LogUtil;
 import com.zrdb.app.util.ParamUtils;
@@ -74,6 +78,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         btnLogin.setOnClickListener(this);
         tvLoginForgetPwd.setOnClickListener(this);
         tvLoginForgetRegister.setOnClickListener(this);
+        ivWxLogin.setOnClickListener(this);
     }
 
     @Override
@@ -91,7 +96,27 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             case R.id.tvLoginForgetRegister://注册
                 startIntentActivity(new Intent(), RegisterActivity.class);
                 break;
+            case R.id.ivWxLogin://微信登录
+                onClickWeChatLogin();
+                break;
         }
+    }
+
+    private void onClickWeChatLogin() {
+        //LogUtil.LogI("来吗？");
+        IWXAPI api = WXAPIFactory.createWXAPI(this, ApiUtils.Config.WX_APP_ID, true);
+
+        if (!api.isWXAppInstalled()) {
+            ToastUtil.showMessage("您手机尚未安装微信，请安装后再登录", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        api.registerApp(ApiUtils.Config.WX_APP_ID);
+        SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "123";//官方说明：用于保持请求和回调的状态，授权请求后原样带回给第三方。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加session进行校验
+        boolean result = api.sendReq(req);
+        LogUtil.LogI("结果：" + result);
     }
 
     private void login() {

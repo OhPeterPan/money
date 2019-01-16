@@ -22,12 +22,14 @@ import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.UserIndexBean;
 import com.zrdb.app.ui.bean.UserInfoBean;
+import com.zrdb.app.ui.common.SchemeActivity;
 import com.zrdb.app.ui.presenter.MeMeanPresenter;
 import com.zrdb.app.ui.response.UserResponse;
 import com.zrdb.app.ui.viewImpl.IMeMeanModelView;
 import com.zrdb.app.util.ApiUtils;
 import com.zrdb.app.util.Convert;
 import com.zrdb.app.util.InfoUtil;
+import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
 import com.zrdb.app.util.UIUtil;
 
@@ -146,6 +148,7 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
         ivMeEdit.setOnClickListener(this);
         llClearCache.setOnClickListener(this);
         tvMeBespoke.setOnClickListener(this);
+        tvCommonQuestion.setOnClickListener(this);
     }
 
     @Override
@@ -159,6 +162,12 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
                 break;
             case R.id.tvMeBespoke://我的预约
                 startIntentActivity(new Intent(), MeBespokeActivity.class);
+                break;
+            case R.id.tvCommonQuestion://常见问题
+                startIntentActivity(new Intent()
+                                .putExtra(ParamUtils.URL, ApiUtils.Config.COMMON_QUESTION_URL)
+                                .putExtra(ParamUtils.TITLE_NAME, "常见问题")
+                        , SchemeActivity.class);
                 break;
         }
     }

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#4e9afa</color>
     <color name="colorAccent">#4e9afa</color>
     <color name="textCustomColor">#eee</color>
+    <color name="lightColor">#44000000</color>
     <color name="white">#FFFFFF</color>
     <color name="standardTextColor">#363636</color>
     <color name="eee">#eee</color>
@@ -11,4 +12,5 @@
     <color name="grayBackground">#f4f3f8</color>
     <color name="lookDocTextColor">#808080</color>
     <color name="textYellow">#d3a872</color>
+    <color name="darkTextYellow">#ff8b26</color>
 </resources>

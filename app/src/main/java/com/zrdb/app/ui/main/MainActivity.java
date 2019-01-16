@@ -29,11 +29,13 @@ import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.IndexBean;
 import com.zrdb.app.ui.bean.IndexListBean;
 import com.zrdb.app.ui.bean.LoginBean;
+import com.zrdb.app.ui.card.CardExhibitionActivity;
 import com.zrdb.app.ui.director.LookDirectorActivity;
 import com.zrdb.app.ui.hospital.LookHosIndexActivity;
 import com.zrdb.app.ui.me.MeMeanActivity;
 import com.zrdb.app.ui.presenter.MainPresenter;
 import com.zrdb.app.ui.response.MainResponse;
+import com.zrdb.app.ui.response.StrResponse;
 import com.zrdb.app.ui.viewImpl.IMainView;
 import com.zrdb.app.ui.visit.IntelligentVisitActivity;
 import com.zrdb.app.util.ApiUtils;
@@ -47,7 +49,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<MainPresenter> implements IMainView {
+public class MainActivity extends BaseActivity<MainPresenter> implements IMainView, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.ivMainMessage)
     ImageView ivMainMessage;
@@ -131,6 +133,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         recyclerView.addItemDecoration(new MainGridDecorate());
         adapter.setHeaderAndEmpty(true);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter ada, View view, int position) {
+        IndexListBean adapterItem = adapter.getItem(position);
+        if (adapterItem == null) return;
+        switch (adapterItem.name) {
+            case "医疗保障卡":
+                presenter.sendNetCardState(account.token, account.uid);
+                break;
+        }
     }
 
     @Override
@@ -183,6 +197,25 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             }
         } else {
             ToastUtil.showMessage(String.valueOf(mainResponse.msg), Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void getCardStateSuccess(String result) {
+        LogUtil.LogI("保障卡：" + result);
+        StrResponse response = Convert.fromJson(result, StrResponse.class);
+        String state = response.data;
+        switch (state) {
+            case "0"://没有购买
+                //startIntentActivity(new Intent(), BuyCardActivity.class);
+                startIntentActivity(new Intent(), CardExhibitionActivity.class);
+                break;
+            case "1"://未支付 去我的订单页面
+
+                break;
+            case "3"://已购买 去我的保障卡界面
+
+                break;
         }
     }
 

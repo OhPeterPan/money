@@ -18,10 +18,24 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainCall
         if (model != null) model.sendNetGetMainInfo(token, uid, this);
     }
 
+    public void sendNetCardState(String token, String uid) {
+        if (mView != null)
+            mView.showLoading();
+        if (model != null)
+            model.sendNetCardState(token, uid, this);
+    }
+
     @Override
     public void getMainInfo(String info) {
         if (!checkResultError(info)) {
             mView.getMainInfoSuccess(info);
+        }
+    }
+
+    @Override
+    public void getCardState(String result) {
+        if (!checkResultError(result)) {
+            mView.getCardStateSuccess(result);
         }
     }
 }
