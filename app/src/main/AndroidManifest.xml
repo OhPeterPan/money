@@ -72,6 +72,7 @@
         <activity android:name=".ui.hospital.LookHosIndexActivity" />
         <activity android:name=".ui.hospital.HosDetailActivity" />
         <activity android:name=".ui.hospital.SubscribeHosActivity" />
+        <activity android:name=".ui.me.MeMeanActivity" />
 
     </application>
 

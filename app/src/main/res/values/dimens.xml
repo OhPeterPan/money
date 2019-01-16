@@ -30,4 +30,5 @@
     <dimen name="lookDocDrawablePadding">6dp</dimen>
     <dimen name="directorSize">55dp</dimen>
     <dimen name="directorDetailSize">45dp</dimen>
+    <dimen name="textMeMenuSize">12sp</dimen>
 </resources>

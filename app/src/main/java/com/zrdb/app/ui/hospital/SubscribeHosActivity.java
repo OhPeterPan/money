@@ -2,6 +2,7 @@ package com.zrdb.app.ui.hospital;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,12 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.zrdb.app.R;
 import com.zrdb.app.image_loader.ImageLoader;
+import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.HospitalInfoBean;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.common.SchemeActivity;
+import com.zrdb.app.ui.me.MeMeanActivity;
 import com.zrdb.app.ui.presenter.SubscribeHosPresenter;
 import com.zrdb.app.ui.response.HosInfoResponse;
 import com.zrdb.app.ui.viewImpl.ISubscribeHosView;
@@ -26,8 +30,10 @@ import com.zrdb.app.util.LogUtil;
 import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
 import com.zrdb.app.util.ToastUtil;
+import com.zrdb.app.watcher.SimpleTextWatcher;
 
 import butterknife.BindView;
+import io.reactivex.functions.Function;
 
 public class SubscribeHosActivity extends BaseActivity<SubscribeHosPresenter> implements ISubscribeHosView {
     @BindView(R.id.tvActTitle)
@@ -54,8 +60,10 @@ public class SubscribeHosActivity extends BaseActivity<SubscribeHosPresenter> im
     EditText etSubHosInputDisease;
     @BindView(R.id.etSubHosInputIllness)
     EditText etSubHosInputIllness;
-    @BindView(R.id.tvSubDocPhone)
-    TextView tvSubDocPhone;
+    @BindView(R.id.etSubHosInputPhone)
+    EditText etSubHosInputPhone;
+    @BindView(R.id.tvSubHocPhone)
+    TextView tvSubHocPhone;
     @BindView(R.id.cbSubHosServiceScheme)
     CheckBox cbSubHosServiceScheme;
     @BindView(R.id.tvScheme)
@@ -100,6 +108,16 @@ public class SubscribeHosActivity extends BaseActivity<SubscribeHosPresenter> im
     protected void initListener() {
         tvScheme.setOnClickListener(this);
         btnSubHosSubmitHerd.setOnClickListener(this);
+        etSubHosInputPhone.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+                if (!StringUtils.isEmpty(s))
+                    tvSubHocPhone.setText(String.format("医生助理会联系您的手机：%s", String.valueOf(s.toString())));
+                else
+                    tvSubHocPhone.setText("");
+            }
+        });
     }
 
     @Override
@@ -118,11 +136,12 @@ public class SubscribeHosActivity extends BaseActivity<SubscribeHosPresenter> im
 
     private void submitPersonInfo() {
         String name = etSubHosInputName.getText().toString().trim();
+        String phone = etSubHosInputPhone.getText().toString().trim();
         String secName = etSubHosInputDisease.getText().toString().trim();
         String disease = etSubHosInputIllness.getText().toString().trim();
-        if (presenter.checkInfo(name, secName, disease)) {
+        if (presenter.checkInfo(name, phone, secName, disease)) {
             if (cbSubHosServiceScheme.isChecked())
-                presenter.sendNetSubmitPageInfo(account.token, account.uid, hosId, name, "", secName, disease);
+                presenter.sendNetSubmitPageInfo(account.token, account.uid, hosId, name, phone, secName, disease);
             else
                 ToastUtil.showMessage("请勾选服务协议！", Toast.LENGTH_SHORT);
 
@@ -145,9 +164,17 @@ public class SubscribeHosActivity extends BaseActivity<SubscribeHosPresenter> im
     }
 
     @Override
-    public void SubmitPersonInfoSuccess(String result) {//去我的界面
+    public void SubmitPersonInfoSuccess(String result) {//去我的界面  关闭前面的所有界面
         LogUtil.logResult("提交", result);
-
+        ToastUtil.showMessage("预约成功！", Toast.LENGTH_SHORT);
+        RxBus.getInstance().chainProcess(new Function() {
+            @Override
+            public Object apply(Object o) throws Exception {
+                return "关闭";//通知详情以及列表页关闭
+            }
+        });
+        startIntentActivity(new Intent(), MeMeanActivity.class);
+        finish();
     }
 
     @Override

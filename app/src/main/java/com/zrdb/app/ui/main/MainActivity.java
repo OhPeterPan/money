@@ -31,6 +31,7 @@ import com.zrdb.app.ui.bean.IndexListBean;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.director.LookDirectorActivity;
 import com.zrdb.app.ui.hospital.LookHosIndexActivity;
+import com.zrdb.app.ui.me.MeMeanActivity;
 import com.zrdb.app.ui.presenter.MainPresenter;
 import com.zrdb.app.ui.response.MainResponse;
 import com.zrdb.app.ui.viewImpl.IMainView;
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     private IBanner bannerImpl;
     private LinearLayout llMainHeadIntelligentVisit, llMainLookHos;
     private LinearLayout llMainLookDirector;
+    private LinearLayout llMainMeMean;
 
     @Override
     protected void initStatusBar() {
@@ -106,12 +108,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         llMainHeadIntelligentVisit = headView.findViewById(R.id.llMainHeadIntelligentVisit);
         llMainLookHos = headView.findViewById(R.id.llMainLookHos);
         llMainLookDirector = headView.findViewById(R.id.llMainLookDirector);
+        llMainMeMean = headView.findViewById(R.id.llMainMeMean);
         banner = headView.findViewById(R.id.banner);
         initFollowAdapter();
-
         llMainHeadIntelligentVisit.setOnClickListener(this);
         llMainLookDirector.setOnClickListener(this);
         llMainLookHos.setOnClickListener(this);
+        llMainMeMean.setOnClickListener(this);
     }
 
     private void initFollowAdapter() {
@@ -157,6 +160,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 break;
             case R.id.llMainLookHos://找医院
                 startIntentActivity(new Intent(), LookHosIndexActivity.class);
+                break;
+            case R.id.llMainMeMean://个人中心
+                startIntentActivity(new Intent(), MeMeanActivity.class);
                 break;
         }
     }

@@ -17,9 +17,13 @@ public class SubscribeHosPresenter extends BasePresenter<ISubscribeHosView> impl
         model = new SubscribeHosModelImpl();
     }
 
-    public boolean checkInfo(String name, String secName, String disease) {
+    public boolean checkInfo(String name, String phone, String secName, String disease) {
         if (StringUtils.isEmpty(name)) {
             ToastUtil.showMessage("请输入姓名！", Toast.LENGTH_SHORT);
+            return false;
+        }
+        if (StringUtils.isEmpty(phone)) {
+            ToastUtil.showMessage("请输入电话号码！", Toast.LENGTH_SHORT);
             return false;
         }
         if (StringUtils.isEmpty(secName)) {

@@ -7,7 +7,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.zrdb.app.R;
+import com.zrdb.app.annotation.Register;
+import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.util.ParamUtils;
 
@@ -57,7 +60,20 @@ public class LookDirectorActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        RxBus.getInstance().register(this);
         initToolbar();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().remove(this);
+    }
+
+    @Register
+    public void finishView(String message) {
+        if (StringUtils.equals("关闭", message))
+            finish();
     }
 
     private void initToolbar() {

@@ -1,5 +1,7 @@
 package com.zrdb.app.ui.presenter;
 
+import com.blankj.utilcode.util.StringUtils;
+import com.zrdb.app.annotation.Register;
 import com.zrdb.app.ui.callback.IHosDetailCallback;
 import com.zrdb.app.ui.model.modelImpl.HosDetailModelImpl;
 import com.zrdb.app.ui.viewImpl.IHosDetailView;
@@ -38,6 +40,14 @@ public class HosDetailPresenter extends BasePresenter<IHosDetailView> implements
         } else {
             if (mView != null)
                 mView.showDataErrInfo(result);
+        }
+    }
+    
+    @Register
+    private void rxBusMessage(String message) {
+        if (StringUtils.equals("关闭", message)) {
+            if (mView != null)
+                mView.finishView();
         }
     }
 }

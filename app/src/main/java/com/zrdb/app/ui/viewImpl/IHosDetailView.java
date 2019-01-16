@@ -7,4 +7,5 @@ public interface IHosDetailView extends IView<String> {
 
     void getHosDocResultSuccess(String result);
 
+    void finishView();
 }

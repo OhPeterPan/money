@@ -15,6 +15,7 @@ import com.zrdb.app.R;
 import com.zrdb.app.adapter.SearchHosAdapter;
 import com.zrdb.app.popup.AddressPopupWindow;
 import com.zrdb.app.popup.HosLevPopupWindow;
+import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.CityBean;
 import com.zrdb.app.ui.bean.DocFilterBean;
@@ -90,10 +91,22 @@ public class LookHosIndexActivity extends BaseActivity<LookHosIndexPresenter> im
 
     @Override
     protected void initData() {
+        RxBus.getInstance().register(presenter);
         account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         initToolbar();
         initAdapter();
         sendNet(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().remove(presenter);
+    }
+
+    @Override
+    public void finishView() {
+        finish();
     }
 
     private void initAdapter() {

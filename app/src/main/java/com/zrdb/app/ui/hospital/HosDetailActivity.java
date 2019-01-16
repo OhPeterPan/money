@@ -21,6 +21,7 @@ import com.zrdb.app.adapter.SearchDocAdapter;
 import com.zrdb.app.image_loader.ImageLoader;
 import com.zrdb.app.popup.HosSecPopupWindow;
 import com.zrdb.app.popup.HosTecPopupWindow;
+import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.HosDetailBean;
 import com.zrdb.app.ui.bean.HospitalInfoBean;
@@ -116,10 +117,22 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
 
     @Override
     protected void initData() {
+        RxBus.getInstance().register(presenter);
         hosId = getIntent().getStringExtra(ParamUtils.HOS_ID);
         account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         initToolbar();
         sendNetHosDetail();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().remove(presenter);
+    }
+
+    @Override
+    public void finishView() {
+        finish();
     }
 
     private void initAdapter() {
@@ -250,7 +263,6 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
                 break;
             case R.id.tvHosApply://立即预约
                 startIntentActivity(new Intent().putExtra(ParamUtils.HOS_ID, hosId), SubscribeHosActivity.class);
-
                 break;
         }
     }

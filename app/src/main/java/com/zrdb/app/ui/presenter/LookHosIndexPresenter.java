@@ -1,5 +1,7 @@
 package com.zrdb.app.ui.presenter;
 
+import com.blankj.utilcode.util.StringUtils;
+import com.zrdb.app.annotation.Register;
 import com.zrdb.app.ui.callback.ILookHosIndexCallback;
 import com.zrdb.app.ui.model.modelImpl.LookHosIndexModelImpl;
 import com.zrdb.app.ui.viewImpl.ILookHosIndexView;
@@ -42,6 +44,14 @@ public class LookHosIndexPresenter extends BasePresenter<ILookHosIndexView> impl
     public void hosFilterResult(String result) {
         if (!checkResultError(result)) {
             mView.hosFilterResultSuccess(result);
+        }
+    }
+
+    @Register
+    private void rxBusMessage(String message) {
+        if (StringUtils.equals("关闭", message)) {
+            if (mView != null)
+                mView.finishView();
         }
     }
 }

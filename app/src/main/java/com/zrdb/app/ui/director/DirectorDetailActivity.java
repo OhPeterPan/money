@@ -10,13 +10,16 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zrdb.app.R;
 import com.zrdb.app.adapter.DirectorAdapter;
+import com.zrdb.app.annotation.Register;
 import com.zrdb.app.custom_view.InnerSwipeRefreshLayout;
 import com.zrdb.app.popup.AddressPopupWindow;
 import com.zrdb.app.popup.DocFilterPopupWindow;
 import com.zrdb.app.popup.TecPopupWindow;
+import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.CateListBean;
 import com.zrdb.app.ui.bean.CityBean;
@@ -102,6 +105,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
 
     @Override
     protected void initData() {
+        RxBus.getInstance().register(this);
         account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         secId = getIntent().getStringExtra(ParamUtils.SEC_ID);
         oldSecId = secId;
@@ -109,6 +113,12 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         initToolbar(secName);
         initAdapter();
         sendNet(true);
+    }
+
+    @Register
+    public void finishView(String message) {
+        if (StringUtils.equals("关闭", message))
+            finish();
     }
 
     private void initAdapter() {
@@ -278,6 +288,7 @@ public class DirectorDetailActivity extends BaseActivity<DirectorDetailPresenter
         if (tecPopupWindow != null) {
             tecPopupWindow.destroy();
         }
+        RxBus.getInstance().remove(this);
     }
 
     private void showTechnicalPopupWindow() {

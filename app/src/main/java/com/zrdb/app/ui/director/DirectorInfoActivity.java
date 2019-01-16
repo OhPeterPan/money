@@ -15,9 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.zrdb.app.R;
+import com.zrdb.app.annotation.Register;
 import com.zrdb.app.image_loader.ImageLoader;
+import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.DocDetailBean;
 import com.zrdb.app.ui.bean.LoginBean;
@@ -90,12 +93,25 @@ public class DirectorInfoActivity extends BaseActivity<DirectorInfoPresenter> im
 
     @Override
     protected void initData() {
+        RxBus.getInstance().register(this);
         account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         String secName = getIntent().getStringExtra(ParamUtils.SEC_NAME);
         docId = getIntent().getStringExtra(ParamUtils.DOC_ID);
         tvActTitle.setText(secName);
         llRoot.setVisibility(View.INVISIBLE);
         sendNet();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().remove(this);
+    }
+
+    @Register
+    public void finishView(String message) {
+        if (StringUtils.equals("关闭", message))
+            finish();
     }
 
     private void sendNet() {

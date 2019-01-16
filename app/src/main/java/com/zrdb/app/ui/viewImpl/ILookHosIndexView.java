@@ -6,4 +6,6 @@ public interface ILookHosIndexView extends IView<String> {
     void getHosListResultSuccess(String result);
 
     void hosFilterResultSuccess(String result);
+
+    void finishView();
 }
