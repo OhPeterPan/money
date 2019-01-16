@@ -33,19 +33,31 @@
                 android:orientation="vertical"
                 android:padding="12dp">
 
-                <FrameLayout
-                    android:id="@+id/flMeMessage"
+
+                <RelativeLayout
+                    android:id="@+id/rlMeMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right">
 
+
                     <ImageView
+                        android:id="@+id/ivMeMessage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
                         android:layout_gravity="center"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_me_message_pic" />
-                </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/ivMeEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="12dp"
+                        android:layout_toLeftOf="@id/ivMeMessage"
+                        android:src="@drawable/ic_edit_person" />
+                </RelativeLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civMePersonPic"
@@ -70,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="6dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textHintColor"
                     android:textSize="11sp"
                     tools:text="小人物" />
             </LinearLayout>

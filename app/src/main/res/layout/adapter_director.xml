@@ -159,7 +159,8 @@
                 android:text="¥ 100"
                 android:textColor="@color/textYellow"
                 android:textSize="13sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/tvAdapterDocMessage"

@@ -100,38 +100,35 @@ public class LookDirectorActivity extends BaseActivity {
     protected void innerListener(View v) {
         switch (v.getId()) {
             case R.id.tvLookDocMedicine://内科
-                secId = "9";
-                secName = "内科";
+                startDirectorDetail("9", "内科");
                 break;
             case R.id.tvLookDocSurgery://外科
-                secId = "1";
-                secName = "外科";
+                startDirectorDetail("1", "外科");
                 break;
             case R.id.tvLookDocGyn://妇产科
-                secId = "2";
-                secName = "妇产科";
+                startDirectorDetail("2", "妇产科");
                 break;
             case R.id.tvLookDocChild://儿科
-                secId = "3";
-                secName = "儿科";
+                startDirectorDetail("3", "儿科");
                 break;
             case R.id.tvLookDocHerbalist://中医科
-                secId = "54";
-                secName = "中医科";
+                startDirectorDetail("54", "中医科");
                 break;
             case R.id.tvLookDocOrthopaedics://骨科
-                secId = "4";
-                secName = "骨科";
+                startDirectorDetail("4", "骨科");
                 break;
             case R.id.tvLookDocDepartment://呼吸科
-                secId = "55";
-                secName = "呼吸科";
+                startDirectorDetail("55", "呼吸科");
                 break;
             case R.id.tvLookDocExtra://其它
-                secId = "8";
-                secName = "其它";
+                startDirectorDetail("8", "其它");
                 break;
         }
+    }
+
+    private void startDirectorDetail(String id, String name) {
+        secId = id;
+        secName = name;
         startIntentActivity(new Intent().putExtra(ParamUtils.SEC_ID, secId)
                         .putExtra(ParamUtils.SEC_NAME, secName),
                 DirectorDetailActivity.class);

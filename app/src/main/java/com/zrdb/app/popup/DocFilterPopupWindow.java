@@ -180,9 +180,15 @@ public class DocFilterPopupWindow extends BasePopupWindow<String> implements Vie
     }
 
     public void show(View parent, int gravity, int x, int y) {
-        Rect rect = new Rect();
+/*        Rect rect = new Rect();
         parent.getGlobalVisibleRect(rect);
         setHeight(ScreenUtils.getScreenHeight() - rect.bottom);
-        showAtLocation(parent, gravity, x, rect.bottom + y);
+        showAtLocation(parent, gravity, x, rect.bottom + y);*/
+        Rect rect = new Rect();
+        parent.getGlobalVisibleRect(rect);
+        int h = parent.getResources().getDisplayMetrics().heightPixels - rect.bottom;
+        setHeight(h);
+
+        super.showAsDropDown(parent, x, y);
     }
 }

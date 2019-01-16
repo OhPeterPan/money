@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.zrdb.app.R;
 import com.zrdb.app.adapter.CityAdapter;
 import com.zrdb.app.adapter.ProvinceAdapter;
@@ -74,10 +73,16 @@ public class AddressPopupWindow extends BasePopupWindow<List<ProvinceBean>> impl
     }
 
     public void show(View parent, int gravity, int x, int y) {
-        Rect rect = new Rect();
+    /*    Rect rect = new Rect();
         parent.getGlobalVisibleRect(rect);
         setHeight(ScreenUtils.getScreenHeight() - rect.bottom);
-        showAtLocation(parent, gravity, x, rect.bottom + y);
+        showAtLocation(parent, gravity, x, rect.bottom + y);*/
+        Rect rect = new Rect();
+        parent.getGlobalVisibleRect(rect);
+        int h = parent.getResources().getDisplayMetrics().heightPixels - rect.bottom;
+        setHeight(h);
+
+        super.showAsDropDown(parent, x, y);
     }
 
     public void setOnChooseAddressListener(OnChooseAddressListener listener) {

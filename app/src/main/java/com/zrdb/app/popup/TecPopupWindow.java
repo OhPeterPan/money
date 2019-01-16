@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -97,10 +96,29 @@ public class TecPopupWindow extends BasePopupWindow<List<SecListBean>> implement
     }
 
     public void show(View parent, int gravity, int x, int y) {
+     /*   Rect rect = new Rect();
+        parent.getGlobalVisibleRect(rect);
+        parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                LogUtil.LogI("开始变化");
+            }
+        });
+
+        if (BarUtils.isNavBarVisible((AppCompatActivity) getContext()))
+            setHeight(ScreenUtils.getScreenHeight() - rect.bottom - BarUtils.getNavBarHeight());
+        else
+            setHeight(ScreenUtils.getScreenHeight() - rect.bottom);
+
+        showAtLocation(parent, gravity, x, rect.bottom + y);*/
+        // if (Build.VERSION.SDK_INT >= 24) {
+        // }
         Rect rect = new Rect();
         parent.getGlobalVisibleRect(rect);
-        setHeight(ScreenUtils.getScreenHeight() - rect.bottom);
-        showAtLocation(parent, gravity, x, rect.bottom + y);
+        int h = parent.getResources().getDisplayMetrics().heightPixels - rect.bottom;
+        setHeight(h);
+
+        super.showAsDropDown(parent, x, y);
     }
 
     private void showLoading() {

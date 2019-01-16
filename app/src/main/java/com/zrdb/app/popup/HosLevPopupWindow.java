@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.view.View;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zrdb.app.R;
 import com.zrdb.app.ui.bean.LevelListBean;
@@ -53,10 +52,15 @@ public class HosLevPopupWindow extends BaseListPopupWindow<LevelListBean> {
     }
 
     public void show(View parent, int gravity, int x, int y) {
-        Rect rect = new Rect();
+/*        Rect rect = new Rect();
         parent.getGlobalVisibleRect(rect);
         setHeight(ScreenUtils.getScreenHeight() - rect.bottom);
-        showAtLocation(parent, gravity, x, rect.bottom + y);
-    }
+        showAtLocation(parent, gravity, x, rect.bottom + y);*/
+        Rect rect = new Rect();
+        parent.getGlobalVisibleRect(rect);
+        int h = parent.getResources().getDisplayMetrics().heightPixels - rect.bottom;
+        setHeight(h);
 
+        super.showAsDropDown(parent, x, y);
+    }
 }

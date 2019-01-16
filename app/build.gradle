@@ -53,7 +53,8 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
     implementation 'com.google.code.gson:gson:2.8.2'
     //各种工具类
-    implementation 'com.blankj:utilcode:1.13.5'
+    //implementation 'com.blankj:utilcode:1.13.5'
+    implementation 'com.blankj:utilcode:1.22.10'
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
     implementation 'com.lzy.net:okgo:3.0.4'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'

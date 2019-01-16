@@ -31,6 +31,9 @@ public class ApiUtils {
     public static final String SUBSCRIBE_HOS_INFO_URL = "Hospital/subscribe?client_id=" + clientId + "&client_token=";
     public static final String SUBSCRIBE_HOS_PERSON_INFO_URL = "Hospital/subscribe_send?client_id=" + clientId + "&client_token=";
     public static final String PERSON_INFO_INDEX_URL = "User/index?client_id=" + clientId + "&client_token=";
+    public static final String USER_INFO_URL = "User/userinfo?client_id=" + clientId + "&client_token=";
+    public static final String CHANGE_USER_INFO_URL = "User/editinfo?client_id=" + clientId + "&client_token=";
+    public static final String BESPOKE_LIST_URL = "Subscribelist/index?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;

@@ -6,5 +6,6 @@ public class UserInfoBean {
     public String thumb;
     public String city;
     public String phone;
+    public String sex;
 
 }
