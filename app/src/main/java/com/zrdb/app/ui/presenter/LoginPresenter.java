@@ -36,6 +36,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginC
         if (model != null) model.sendNetLogin(phone, pwd, this);
     }
 
+    public void sendNetWXLogin(String access_token, String expires_in, String openid, String refresh_token, String scope) {
+        if (mView != null) mView.showLoading();
+        if (model != null)
+            model.sendNetLogin(access_token, expires_in, openid, refresh_token, scope, this);
+    }
+
     @Override
     public void getLoginResult(String result) {
         if (mView != null && !checkResultError(result)) {
@@ -43,4 +49,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginC
             mView.getLoginResult(result);
         }
     }
+
+
 }

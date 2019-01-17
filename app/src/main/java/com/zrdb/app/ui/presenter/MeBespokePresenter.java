@@ -24,6 +24,9 @@ public class MeBespokePresenter extends BasePresenter<IMeBespokeView> implements
     public void getBespokeList(String result) {
         if (!checkResultError(result)) {
             mView.getBespokeListSuccess(result);
+        } else {
+            if (mView != null)
+                mView.showDataErrInfo(result);
         }
     }
 }

@@ -3,14 +3,24 @@ package com.zrdb.app.wxapi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.zrdb.app.R;
 import com.zrdb.app.app.AppApplication;
+import com.zrdb.app.event.EventBusUtil;
+import com.zrdb.app.event.MsgEvent;
+import com.zrdb.app.util.ApiUtils;
 import com.zrdb.app.util.LogUtil;
+import com.zrdb.app.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
     public static String code;
@@ -51,10 +61,13 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
                 LogUtil.LogI("onResp: 成功");
-                finish();
+
+                getAccessToken(resp, code);
+                // finish();
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
-                LogUtil.LogI("onResp: 用户取消");
+                //LogUtil.LogI("onResp: 用户取消");
+                ToastUtil.showMessage("用户已取消", Toast.LENGTH_SHORT);
                 finish();
                 break;
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
@@ -63,8 +76,34 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                 break;
             case BaseResp.ErrCode.ERR_BAN:
                 LogUtil.LogI("onResp: 应用签名错误");
-                //finish();
+                finish();
                 break;
         }
+    }
+
+    private void getAccessToken(BaseResp resp, String code) {
+        OkGo.<String>get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + ApiUtils.Config.WX_APP_ID + "&secret=" + ApiUtils.Config.WX_APP_SECRET)
+                .params("code", code)
+                .params("grant_type", "authorization_code")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        LogUtil.LogI("微信返回:" + response.body());
+                        parseJson(response.body());
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        ToastUtil.showMessage("微信授权失败", Toast.LENGTH_SHORT);
+                    }
+                });
+
+    }
+
+    private void parseJson(String result) {
+        EventBus.getDefault().post(new MsgEvent(EventBusUtil.LOGIN_CODE, result));//0x0010 传递给
+        finish();
+
     }
 }

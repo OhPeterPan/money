@@ -114,7 +114,7 @@ public class MeBespokeActivity extends BaseActivity<MeBespokePresenter> implemen
 
     @Override
     public void showDataErrInfo(String result) {
-
+        initAdapter(null, null);
     }
 
     @Override

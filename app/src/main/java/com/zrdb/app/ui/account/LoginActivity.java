@@ -16,9 +16,12 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zrdb.app.R;
+import com.zrdb.app.event.EventBusUtil;
+import com.zrdb.app.event.MsgEvent;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.LoginResponse;
+import com.zrdb.app.ui.bean.WeChatLoginTokenBean;
 import com.zrdb.app.ui.main.MainActivity;
 import com.zrdb.app.ui.presenter.LoginPresenter;
 import com.zrdb.app.ui.viewImpl.ILoginView;
@@ -28,6 +31,10 @@ import com.zrdb.app.util.LogUtil;
 import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
 import com.zrdb.app.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -69,7 +76,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     @Override
     protected void initData() {
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
         setBackVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -115,8 +131,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
         req.state = "123";//官方说明：用于保持请求和回调的状态，授权请求后原样带回给第三方。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加session进行校验
-        boolean result = api.sendReq(req);
-        LogUtil.LogI("结果：" + result);
+        api.sendReq(req);
+        //  LogUtil.LogI("结果：" + result);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MsgEvent event) {
+        if (event.code == EventBusUtil.LOGIN_CODE) {
+            ToastUtil.showMessage("微信授权成功!", Toast.LENGTH_SHORT);
+            WeChatLoginTokenBean tokenBean = Convert.fromJson(event.msg, WeChatLoginTokenBean.class);
+            presenter.sendNetWXLogin(tokenBean.access_token, tokenBean.expires_in, tokenBean.openid, tokenBean.refresh_token, tokenBean.scope);
+        }
     }
 
     private void login() {

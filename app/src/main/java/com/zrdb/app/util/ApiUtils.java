@@ -35,10 +35,12 @@ public class ApiUtils {
     public static final String CHANGE_USER_INFO_URL = "User/editinfo?client_id=" + clientId + "&client_token=";
     public static final String BESPOKE_LIST_URL = "Subscribelist/index?client_id=" + clientId + "&client_token=";
     public static final String GET_BESPOKE_DETAIL_URL = "Subscribelist/get_details?client_id=" + clientId + "&client_token=";
+    public static final String LOGIN_WX_URL = "Login/wechat_login?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;
         public static final String WX_APP_ID = "wxe6fde7f9414981b9";
+        public static final String WX_APP_SECRET = "5f02238239719ceea9e3006d48912b15";
         private static final String DEBUG_URL = "http://zrdb.vipwfx.cn/api.php/";
         private static final String IMAGE_BASE_URL = "http://zrdb.vipwfx.cn";
         private static final String RELEASE_URL = "http://zrdb.vipwfx.cn/api.php/";
