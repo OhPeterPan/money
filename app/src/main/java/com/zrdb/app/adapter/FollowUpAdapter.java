@@ -18,6 +18,7 @@ public class FollowUpAdapter extends BaseQuickAdapter<IndexListBean, BaseViewHol
     protected void convert(BaseViewHolder helper, IndexListBean item) {
         ImageView ivAdapterFollowUpPic = helper.getView(R.id.ivAdapterFollowUpPic);
         ImageLoader.with(mContext)
+                .skipMemoryCache(true)
                 .load(String.format("%1$s%2$s", ApiUtils.Config.getImageDimen(), item.image)).into(ivAdapterFollowUpPic);
         helper.setText(R.id.tvAdapterFollowUpInfo, item.name);
     }

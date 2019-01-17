@@ -142,7 +142,7 @@ public class BuyCardActivity extends BaseActivity<BuyCardPresenter> implements I
     private void initPercent(String percent) {
         SpannableString sp = new SpannableString("全站预约服务" + percent + "折");
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#4e9afa"));
-        sp.setSpan(colorSpan, 5, sp.length() - 1, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(colorSpan, 6, sp.length() - 1, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvCardVipTwoTitle.setText(sp);
     }
 

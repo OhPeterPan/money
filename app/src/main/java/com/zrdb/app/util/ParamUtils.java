@@ -13,4 +13,5 @@ public class ParamUtils {
     public static final String TYPE = "type";
     public static final String STATUS = "status";
     public static final String ORDER_ID = "orderId";
+    public static final String MONEY = "money";
 }

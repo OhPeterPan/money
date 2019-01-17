@@ -36,4 +36,11 @@ public class OrderPresenter extends BasePresenter<IOrderModelView> implements IO
             mView.orderDeleteSuccess(result);
         }
     }
+
+    public void sendNetDelOrder(String token, String uid, String type, String subId) {
+        if (mView != null)
+            mView.showLoading();
+        if (model != null)
+            model.sendNetGetOrder(token, uid, type, subId, this);
+    }
 }

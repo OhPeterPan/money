@@ -1,7 +1,7 @@
 package com.zrdb.app.image_loader.loder;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.StringUtils;
@@ -36,10 +36,10 @@ public class GlideLoader implements ILoader {
     public void request(ImageConfig config) {
         this.mConfig = config;
         if (mConfig == null) return;
-        RequestBuilder<Bitmap> builder = null;
+        RequestBuilder<Drawable> builder = null;
         RequestManager requestManager = Glide.with(config.context);
         if (config.asBitmap)
-            builder = requestManager.asBitmap();
+            builder = requestManager.asDrawable();
 
         if (!StringUtils.isEmpty(config.url)) {
             builder = builder.load(config.url);

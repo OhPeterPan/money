@@ -41,10 +41,12 @@ public class ApiUtils {
     public static final String BUY_ENSURE_CARD_URL = "Card/buy?client_id=" + clientId + "&client_token=";
     public static final String PAY_ENSURE_INFO_URL = "Pay/card_pay?client_id=" + clientId + "&client_token=";
     public static final String PAY_INFO_URL = "Pay/index?client_id=" + clientId + "&client_token=";
+    public static final String DOC_JOB_URL = "Index/doctor_type?client_id=" + clientId + "&client_token=";
+    public static final String ADD_DOC_URL = "Index/doctor_send?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;
-        public static final String WX_APP_ID = "wxe6fde7f9414981b9";
+        public static final String WX_APP_ID = "wxe6fde7f9414981b9";//wxdcc11589d1797b1e
         public static final String WX_APP_SECRET = "5f02238239719ceea9e3006d48912b15";
         private static final String DEBUG_URL = "http://zrdb.vipwfx.cn/api.php/";
         private static final String IMAGE_BASE_URL = "http://zrdb.vipwfx.cn";

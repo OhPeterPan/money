@@ -20,6 +20,13 @@ public class OrderBuyPresenter extends BasePresenter<IOrderBuyView> implements I
             model.sendNetGetEnsureInfo(token, uid, this);
     }
 
+    public void sendNetPay(String token, String uid, String type, String orderId) {
+        if (mView != null)
+            mView.showLoading();
+        if (model != null)
+            model.sendNetGetPayInfo(token, uid, type, orderId, this);
+    }
+
     @Override
     public void getEnsureInfo(String result) {
         if (!checkResultError(result)) {
@@ -33,4 +40,6 @@ public class OrderBuyPresenter extends BasePresenter<IOrderBuyView> implements I
             mView.getPayInfoSuccess(result);
         }
     }
+
+
 }

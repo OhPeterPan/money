@@ -87,6 +87,7 @@
             android:exported="true" />
         <activity android:name=".ui.me.MeOrderActivity" />
         <activity android:name=".ui.order.OrderBuyActivity" />
+        <activity android:name=".ui.main.DocAddActivity" />
 
     </application>
 

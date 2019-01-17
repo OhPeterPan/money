@@ -146,7 +146,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 presenter.sendNetCardState(account.token, account.uid);
                 break;
             case "医生加入":
-                presenter.sendNetCardState(account.token, account.uid);
+                startIntentActivity(new Intent(), DocAddActivity.class);
+                break;
+            case "医疗保险":
+            case "专家会诊":
+                ToastUtil.showMessage("暂未开放~", Toast.LENGTH_SHORT);
                 break;
         }
     }
@@ -281,6 +285,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         protected void convert(BaseViewHolder helper, IndexListBean item) {
             ImageView ivAdapterBottom = helper.getView(R.id.ivAdapterBottom);
             ImageLoader.with(mContext)
+                    .skipMemoryCache(true)
                     .load(ApiUtils.Config.getImageDimen() + item.image)
                     .into(ivAdapterBottom);
         }

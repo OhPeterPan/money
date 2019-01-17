@@ -103,8 +103,9 @@ public class BannerImpl implements IBanner {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
             //Glide 加载图片简单用法
-            RequestOptions options = new RequestOptions().placeholder(R.drawable.ic_placeholder);
-            Glide.with(mBannerImpl.getContext()).asBitmap().load(path).apply(options).into(imageView);
+            RequestOptions options = new RequestOptions().placeholder(R.drawable.ic_placeholder).skipMemoryCache(true);
+            Glide.with(mBannerImpl.getContext()).asDrawable()
+                    .load(path).apply(options).into(imageView);
         }
     }
 
