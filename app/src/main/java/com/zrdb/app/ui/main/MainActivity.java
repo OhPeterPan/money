@@ -33,6 +33,7 @@ import com.zrdb.app.ui.card.CardExhibitionActivity;
 import com.zrdb.app.ui.director.LookDirectorActivity;
 import com.zrdb.app.ui.hospital.LookHosIndexActivity;
 import com.zrdb.app.ui.me.MeMeanActivity;
+import com.zrdb.app.ui.me.MeOrderActivity;
 import com.zrdb.app.ui.presenter.MainPresenter;
 import com.zrdb.app.ui.response.MainResponse;
 import com.zrdb.app.ui.response.StrResponse;
@@ -144,6 +145,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             case "医疗保障卡":
                 presenter.sendNetCardState(account.token, account.uid);
                 break;
+            case "医生加入":
+                presenter.sendNetCardState(account.token, account.uid);
+                break;
         }
     }
 
@@ -211,7 +215,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 startIntentActivity(new Intent(), CardExhibitionActivity.class);
                 break;
             case "1"://未支付 去我的订单页面
-
+                startIntentActivity(new Intent(), MeOrderActivity.class);
                 break;
             case "3"://已购买 去我的保障卡界面
 

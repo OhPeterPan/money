@@ -1,26 +1,38 @@
 package com.zrdb.app.ui.card;
 
-import android.support.v7.widget.Toolbar;
+import android.content.Intent;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.zrdb.app.R;
+import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
+import com.zrdb.app.ui.bean.CardInfoBean;
+import com.zrdb.app.ui.bean.LoginBean;
+import com.zrdb.app.ui.order.OrderBuyActivity;
+import com.zrdb.app.ui.presenter.BuyCardPresenter;
+import com.zrdb.app.ui.response.CardInfoResponse;
+import com.zrdb.app.ui.viewImpl.IBuyCardView;
+import com.zrdb.app.util.Convert;
+import com.zrdb.app.util.LogUtil;
+import com.zrdb.app.util.ParamUtils;
+import com.zrdb.app.util.SpUtil;
 
 import butterknife.BindView;
+import io.reactivex.functions.Function;
 
-public class BuyCardActivity extends BaseActivity {
+public class BuyCardActivity extends BaseActivity<BuyCardPresenter> implements IBuyCardView {
     @BindView(R.id.tvActTitle)
     TextView tvActTitle;
-    @BindView(R.id.back)
-    ImageView back;
     @BindView(R.id.tvActRightTitle)
     TextView tvActRightTitle;
     @BindView(R.id.ivToolbarRight)
     ImageView ivToolbarRight;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.tvCardTitle)
     TextView tvCardTitle;
     @BindView(R.id.tvCardGroom)
@@ -47,6 +59,11 @@ public class BuyCardActivity extends BaseActivity {
     TextView tvDocCard;
     @BindView(R.id.tvDocCardApply)
     TextView tvDocCardApply;
+    @BindView(R.id.scCard)
+    ScrollView scCard;
+    @BindView(R.id.tvCardMoney)
+    TextView tvCardMoney;
+    private LoginBean account;
 
     @Override
     protected int getLayoutId() {
@@ -55,7 +72,7 @@ public class BuyCardActivity extends BaseActivity {
 
     @Override
     protected void initPresenter() {
-
+        presenter = new BuyCardPresenter(this);
     }
 
     private void initToolbar() {
@@ -68,8 +85,10 @@ public class BuyCardActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         initToolbar();
         initPage();
+        presenter.sendNetBuyEnsureCard(account.token, account.uid);
     }
 
     private void initPage() {
@@ -91,8 +110,44 @@ public class BuyCardActivity extends BaseActivity {
 
                 break;
             case R.id.tvDocCardApply://立即购买  去购买界面
-
+                payEnsurePage();
                 break;
         }
+    }
+
+    private void payEnsurePage() {
+        startIntentActivity(new Intent().putExtra(ParamUtils.TYPE, "3")
+                        .putExtra(ParamUtils.FLAG, 1)
+                , OrderBuyActivity.class);
+        RxBus.getInstance().chainProcess(new Function() {
+            @Override
+            public Object apply(Object o) throws Exception {
+                return "支付关闭";
+            }
+        });
+        finish();
+    }
+
+    @Override
+    public void getEnsureCardOrderSuccess(String result) {
+        LogUtil.LogI("购买：" + result);
+        scCard.setVisibility(View.VISIBLE);
+        CardInfoResponse response = Convert.fromJson(result, CardInfoResponse.class);
+        CardInfoBean cardInfo = response.data;
+        tvCardTitle.setText(cardInfo.name);
+        tvCardMoney.setText(cardInfo.money);
+        initPercent(cardInfo.percent);
+    }
+
+    private void initPercent(String percent) {
+        SpannableString sp = new SpannableString("全站预约服务" + percent + "折");
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#4e9afa"));
+        sp.setSpan(colorSpan, 5, sp.length() - 1, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvCardVipTwoTitle.setText(sp);
+    }
+
+    @Override
+    public void showDataErrInfo(String result) {
+
     }
 }

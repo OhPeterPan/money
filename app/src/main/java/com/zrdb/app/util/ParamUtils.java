@@ -11,4 +11,6 @@ public class ParamUtils {
     public static final String HOS_ID = "hosId";
     public static final String SUB_ID = "subId";
     public static final String TYPE = "type";
+    public static final String STATUS = "status";
+    public static final String ORDER_ID = "orderId";
 }

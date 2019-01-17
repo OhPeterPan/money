@@ -85,6 +85,8 @@
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true" />
+        <activity android:name=".ui.me.MeOrderActivity" />
+        <activity android:name=".ui.order.OrderBuyActivity" />
 
     </application>
 

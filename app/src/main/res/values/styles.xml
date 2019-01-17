@@ -58,4 +58,9 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="tabOrderTextStyle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#a5a5a5</item>
+    </style>
+
 </resources>

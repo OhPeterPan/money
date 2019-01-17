@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,10 +14,12 @@
         android:background="@color/eee" />
 
     <ScrollView
+        android:id="@+id/scCard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,9 +63,9 @@
                                 android:id="@+id/tvCardTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="医疗保障卡"
                                 android:textColor="@color/standardTextColor"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                tools:text="医疗保障卡" />
 
                             <TextView
                                 android:id="@+id/tvCardGroom"
@@ -116,13 +119,14 @@
                                 android:textSize="11sp" />
 
                             <TextView
+                                android:id="@+id/tvCardMoney"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="6dp"
-                                android:text="199.00"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="199.00" />
 
                             <TextView
                                 android:layout_width="wrap_content"

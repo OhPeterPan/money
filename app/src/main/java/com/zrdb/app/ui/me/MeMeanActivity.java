@@ -31,6 +31,7 @@ import com.zrdb.app.util.Convert;
 import com.zrdb.app.util.InfoUtil;
 import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
+import com.zrdb.app.util.SystemUtil;
 import com.zrdb.app.util.UIUtil;
 
 import java.util.Locale;
@@ -149,6 +150,10 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
         llClearCache.setOnClickListener(this);
         tvMeBespoke.setOnClickListener(this);
         tvCommonQuestion.setOnClickListener(this);
+        tvAboutMe.setOnClickListener(this);
+        tvMeLaw.setOnClickListener(this);
+        tvMeOrder.setOnClickListener(this);
+        btnMeMeanExitApp.setOnClickListener(this);
     }
 
     @Override
@@ -169,7 +174,39 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
                                 .putExtra(ParamUtils.TITLE_NAME, "常见问题")
                         , SchemeActivity.class);
                 break;
+            case R.id.tvAboutMe://关于我们
+                startIntentActivity(new Intent()
+                                .putExtra(ParamUtils.URL, ApiUtils.Config.ABOUT_ME_URL)
+                                .putExtra(ParamUtils.TITLE_NAME, "关于我们")
+                        , SchemeActivity.class);
+                break;
+            case R.id.tvMeLaw://法律条款
+                startIntentActivity(new Intent()
+                                .putExtra(ParamUtils.URL, ApiUtils.Config.SERVICE_SCHEME_URL)
+                                .putExtra(ParamUtils.TITLE_NAME, "法律声明")
+                        , SchemeActivity.class);
+                break;
+            case R.id.tvMeOrder://我的订单
+                startIntentActivity(new Intent(), MeOrderActivity.class);
+                break;
+            case R.id.btnMeMeanExitApp:
+                showExitAppDialog();
+                break;
         }
+    }
+
+    private void showExitAppDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("确定退出登录？");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //  CacheUtils.getInstance().c
+                SystemUtil.exitApp(MeMeanActivity.this);
+            }
+        });
+        builder.setNegativeButton("取消", null);
+        builder.show();
     }
 
     private void showClearCacheDialog() {

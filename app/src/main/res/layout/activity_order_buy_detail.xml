@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f3f8">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:text="支付中心"
+        android:textColor="@color/standardTextColor"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_order_pay_back"
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="18dp"
+        android:paddingTop="6dp">
+
+        <ImageView
+            android:id="@+id/ivClosePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/ic_close_white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="25dp"
+            android:paddingRight="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RMB"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvOrderMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    tools:text="100" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="本次应付预约费用"
+                android:textColor="#6a6a6a"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="您的支付信息："
+                android:textColor="#6a6a6a"
+                android:textSize="11sp" />
+
+            <LinearLayout
+                android:id="@+id/llHosPay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvOrderHosName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/standardTextColor"
+                    android:textSize="13sp"
+                    tools:text="你预约的医院" />
+
+                <TextView
+                    android:id="@+id/tvOrderHosAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:drawableLeft="@drawable/ic_hos_address_pic"
+                    android:drawablePadding="6dp"
+                    android:textColor="#6a6a6a"
+                    android:textSize="11sp"
+                    tools:text="预约的地址" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llEnsurePay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="医疗保障卡购买"
+                    android:textColor="@color/standardTextColor"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="2dp"
+                    android:text="专属医疗顾问，对症推荐名医;&#x000A;全站预约服务;"
+                    android:textColor="@color/standardTextColor"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlDocPay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvMulPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    tools:text="名字" />
+
+                <TextView
+                    android:id="@+id/tvMulTitleProfessor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toRightOf="@id/tvMulPersonName"
+                    android:textColor="#060606"
+                    android:textSize="12sp"
+                    tools:text="名字" />
+
+                <TextView
+                    android:id="@+id/tvMulOffice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toRightOf="@id/tvMulTitleProfessor"
+                    android:textColor="#060606"
+                    android:textSize="12sp"
+                    tools:text="科室" />
+
+                <TextView
+                    android:id="@+id/tvAdapterMulHos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvMulPersonName"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/textYellow"
+                    android:textSize="12sp"
+                    tools:text="医院以及科室" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnOrderPay"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/shape_login"
+                android:text="确认并支付"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

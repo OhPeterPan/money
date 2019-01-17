@@ -36,6 +36,11 @@ public class ApiUtils {
     public static final String BESPOKE_LIST_URL = "Subscribelist/index?client_id=" + clientId + "&client_token=";
     public static final String GET_BESPOKE_DETAIL_URL = "Subscribelist/get_details?client_id=" + clientId + "&client_token=";
     public static final String LOGIN_WX_URL = "Login/wechat_login?client_id=" + clientId + "&client_token=";
+    public static final String ORDER_LIST_URL = "Order/index?client_id=" + clientId + "&client_token=";
+    public static final String ORDER_DEL_URL = "Order/delete?client_id=" + clientId + "&client_token=";
+    public static final String BUY_ENSURE_CARD_URL = "Card/buy?client_id=" + clientId + "&client_token=";
+    public static final String PAY_ENSURE_INFO_URL = "Pay/card_pay?client_id=" + clientId + "&client_token=";
+    public static final String PAY_INFO_URL = "Pay/index?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;
@@ -48,6 +53,7 @@ public class ApiUtils {
         private static final String DEBUG_PWD = "123456";
         public static final String SERVICE_SCHEME_URL = "http://zrdb.vipwfx.cn/index/contract?id=1";
         public static final String COMMON_QUESTION_URL = "http://zrdb.vipwfx.cn/index/problem";
+        public static final String ABOUT_ME_URL = "http://zrdb.vipwfx.cn/index/contract?id=2";
         private static String dimen = RELEASE_URL;
         private static boolean isDebug = true;
 
