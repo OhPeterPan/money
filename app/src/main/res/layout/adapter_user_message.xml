@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:orientation="horizontal"
+    android:paddingRight="12dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAdapterMessageName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="平台"
+            android:textColor="#848481"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tvAdapterMessageContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="#5eb779"
+            android:lineSpacingExtra="2dp"
+            android:padding="6dp"
+            android:text="nasuiohdfsdfasjkdhflkasdhfahsdklfklasdfkaskdlhfgjkasdfgkasjdhdkghkasjhgkhasdhaskhgaskhghasjhgkashghkashgashkghasjkghah"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civAdapterMessagePic"
+        android:layout_width="@dimen/userPicture"
+        android:layout_height="@dimen/userPicture"
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/ic_doc_head" />
+</LinearLayout>

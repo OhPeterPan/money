@@ -117,32 +117,38 @@
                             android:textSize="12sp"
                             tools:text="职称" />
 
-                        <TextView
-                            android:id="@+id/tvDocPlaceHos"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/tvDirectorName"
                             android:layout_marginTop="6dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:textColor="@color/textYellow"
-                            android:textSize="13sp"
-                            tools:text="所在医院" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvDocHosScale"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvDirectorName"
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_toRightOf="@id/tvDocPlaceHos"
-                            android:background="@drawable/shape_yellow_bg"
-                            android:paddingLeft="8dp"
-                            android:paddingRight="8dp"
-                            android:textColor="@color/white"
-                            android:textSize="11sp"
-                            tools:text="三级甲等" />
+                            <TextView
+                                android:id="@+id/tvDocPlaceHos"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:textColor="@color/textYellow"
+                                android:textSize="13sp"
+                                tools:text="所在医院" />
+
+                            <TextView
+                                android:id="@+id/tvDocHosScale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:background="@drawable/shape_yellow_bg"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp"
+                                android:textColor="@color/white"
+                                android:textSize="11sp"
+                                tools:text="三级甲等" />
+                        </LinearLayout>
+
 
                     </RelativeLayout>
                 </LinearLayout>

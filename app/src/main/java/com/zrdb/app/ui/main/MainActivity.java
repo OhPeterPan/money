@@ -30,6 +30,7 @@ import com.zrdb.app.ui.bean.IndexBean;
 import com.zrdb.app.ui.bean.IndexListBean;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.card.CardExhibitionActivity;
+import com.zrdb.app.ui.common.SchemeActivity;
 import com.zrdb.app.ui.director.LookDirectorActivity;
 import com.zrdb.app.ui.hospital.LookHosIndexActivity;
 import com.zrdb.app.ui.me.MeMeanActivity;
@@ -42,6 +43,7 @@ import com.zrdb.app.ui.visit.IntelligentVisitActivity;
 import com.zrdb.app.util.ApiUtils;
 import com.zrdb.app.util.Convert;
 import com.zrdb.app.util.LogUtil;
+import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
 import com.zrdb.app.util.ToastUtil;
 
@@ -73,6 +75,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     private LinearLayout llMainHeadIntelligentVisit, llMainLookHos;
     private LinearLayout llMainLookDirector;
     private LinearLayout llMainMeMean;
+    private LinearLayout llMessageOnLine;
 
     @Override
     protected void initStatusBar() {
@@ -112,12 +115,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         llMainLookHos = headView.findViewById(R.id.llMainLookHos);
         llMainLookDirector = headView.findViewById(R.id.llMainLookDirector);
         llMainMeMean = headView.findViewById(R.id.llMainMeMean);
+        llMessageOnLine = headView.findViewById(R.id.llMessageOnLine);
         banner = headView.findViewById(R.id.banner);
         initFollowAdapter();
         llMainHeadIntelligentVisit.setOnClickListener(this);
         llMainLookDirector.setOnClickListener(this);
         llMainLookHos.setOnClickListener(this);
         llMainMeMean.setOnClickListener(this);
+        llMessageOnLine.setOnClickListener(this);
     }
 
     private void initFollowAdapter() {
@@ -125,6 +130,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         horizontalRecyclerView.setHasFixedSize(true);
         horizontalRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         horizontalRecyclerView.setAdapter(followUpAdapter);
+        followUpAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                IndexListBean bean = (IndexListBean) adapter.getItem(position);
+                String url = bean.link;
+                startIntentActivity(new Intent()
+                        .putExtra(ParamUtils.URL, url)
+                        .putExtra(ParamUtils.TITLE_NAME, String.valueOf(bean.name)), SchemeActivity.class);
+            }
+        });
     }
 
     private void initAdapter() {
@@ -186,6 +201,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             case R.id.llMainMeMean://个人中心
                 startIntentActivity(new Intent(), MeMeanActivity.class);
                 break;
+            case R.id.llMessageOnLine://在线咨询
+                startIntentActivity(new Intent(), MessageOnLineActivity.class);
+                break;
         }
     }
 
@@ -227,7 +245,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         }
     }
 
-    private void setBanner(List<IndexListBean> topSlider) {
+    private void setBanner(final List<IndexListBean> topSlider) {
         List<String> arrayListImages = new ArrayList();
         List<String> arrayListTitles = new ArrayList();
 
@@ -247,10 +265,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-          /*      String u_id = bannerList.get(position).u_id;
-                FirstResultBean resultBean = new FirstResultBean();
-                resultBean.u_id = u_id;
-                startActivity(new Intent(getActivity(), UserDetailActivity.class).putExtra(IntentUtil.USER_BEAN, resultBean));*/
+                String url = topSlider.get(position).link;
+                startIntentActivity(new Intent()
+                        .putExtra(ParamUtils.URL, url)
+                        .putExtra(ParamUtils.TITLE_NAME, "介绍"), SchemeActivity.class);
             }
         });
 

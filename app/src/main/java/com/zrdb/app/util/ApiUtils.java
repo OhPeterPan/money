@@ -43,6 +43,8 @@ public class ApiUtils {
     public static final String PAY_INFO_URL = "Pay/index?client_id=" + clientId + "&client_token=";
     public static final String DOC_JOB_URL = "Index/doctor_type?client_id=" + clientId + "&client_token=";
     public static final String ADD_DOC_URL = "Index/doctor_send?client_id=" + clientId + "&client_token=";
+    public static final String MESSAGE_ON_LINE_URL = "Chat/index?client_id=" + clientId + "&client_token=";
+    public static final String SEND_MESSAGE_URL = "Chat/sendmessage?client_id=" + clientId + "&client_token=";
 
     public static class Config {
         public static final boolean DEBUG = true;
