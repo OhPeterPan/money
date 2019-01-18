@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/eee"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_update_logo" />
+
+    <TextView
+        android:id="@+id/tvUpdateVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="6dp"
+        android:text="版本号"
+        android:textColor="#a4a4a6"
+        android:textSize="11sp" />
+
+    <ViewStub
+        android:id="@id/viewStub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:drawablePadding="6dp"
+            android:drawableTop="@drawable/ic_update_bottom_pic"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="Head of section office on duty"
+            android:textColor="#a4a4a6"
+            android:textSize="10sp" />
+    </FrameLayout>
+</LinearLayout>

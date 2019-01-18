@@ -25,4 +25,5 @@
     <item name="ivSec" type="id" />
     <item name="llRoot" type="id" />
     <item name="tvScheme" type="id" />
+    <item name="viewStub" type="id" />
 </resources>

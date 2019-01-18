@@ -10,17 +10,22 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zrdb.app.R;
 import com.zrdb.app.albumconfig.AlbumConfig;
 import com.zrdb.app.image_loader.ImageLoader;
 import com.zrdb.app.imagecompress.ImageCompress;
+import com.zrdb.app.popup.TecJobPopupWindow;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.LoginBean;
+import com.zrdb.app.ui.bean.TecListBean;
 import com.zrdb.app.ui.common.SchemeActivity;
 import com.zrdb.app.ui.presenter.DocAddPresenter;
+import com.zrdb.app.ui.response.DocJobResponse;
 import com.zrdb.app.ui.response.StrResponse;
 import com.zrdb.app.ui.viewImpl.IDocAddView;
 import com.zrdb.app.util.ApiUtils;
@@ -28,13 +33,14 @@ import com.zrdb.app.util.Convert;
 import com.zrdb.app.util.LogUtil;
 import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
+import com.zrdb.app.util.ToastUtil;
 
 import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class DocAddActivity extends BaseActivity<DocAddPresenter> implements AlbumConfig.IUploadListener, ImageCompress.CompressImageListener, IDocAddView {
+public class DocAddActivity extends BaseActivity<DocAddPresenter> implements AlbumConfig.IUploadListener, ImageCompress.CompressImageListener, IDocAddView, TecJobPopupWindow.OnChooseDocJobListener {
     @BindView(R.id.tvActTitle)
     TextView tvActTitle;
     @BindView(R.id.ivToolbarRight)
@@ -63,6 +69,9 @@ public class DocAddActivity extends BaseActivity<DocAddPresenter> implements Alb
     private AlbumConfig albumConfig;
     private ImageCompress imageCompress;
     private String picture;
+    private List<TecListBean> tecList;
+    private TecJobPopupWindow tecJobPopupWindow;
+    private String tecId;
 
     @Override
     protected int getLayoutId() {
@@ -85,9 +94,7 @@ public class DocAddActivity extends BaseActivity<DocAddPresenter> implements Alb
     private void initPage() {
         SpannableString sp = new SpannableString("添加图片(必选项)");
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#cac7c8"));
-        //RelativeSizeSpan sizeSpan = new RelativeSizeSpan(0.8f);
         sp.setSpan(colorSpan, 4, sp.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        //sp.setSpan(sizeSpan, 4, sp.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         tvDocImageState.setText(sp);
     }
 
@@ -118,11 +125,61 @@ public class DocAddActivity extends BaseActivity<DocAddPresenter> implements Alb
                 );
                 break;
             case R.id.tvDocChooseJob://选择医生职称
-
+                if (tecList == null || tecList.isEmpty())
+                    presenter.sendNetGetDocJob(account.token, account.uid);
+                else
+                    showDocJobPopupWindow(tecList);
                 break;
             case R.id.btnSubmitDocInfo://提交
-
+                submitDocInfo();
                 break;
+        }
+    }
+
+    private void submitDocInfo() {
+        String name = etDocInputName.getText().toString().trim();
+        String phone = etDocInputPhone.getText().toString().trim();
+        String address = etDocInputWorkAddress.getText().toString().trim();
+        String offices = etDocInputOffices.getText().toString().trim();
+        if (presenter.checkInfo(name, phone, address, offices, tecId, picture)) {
+            if (cbDocServiceScheme.isChecked()) {
+                presenter.sendNetUploadDocInfo(account.token, account.uid, name, phone, address, offices, tecId, picture);
+            } else {
+                ToastUtil.showMessage("请勾选服务协议！", Toast.LENGTH_SHORT);
+            }
+        }
+    }
+
+    private void showDocJobPopupWindow(List<TecListBean> tecList) {
+        if (tecJobPopupWindow == null) {
+            tecJobPopupWindow = new TecJobPopupWindow(this, tecList, R.layout.adapter_tec_job);
+            tecJobPopupWindow.setOnChooseDocJobListener(this);
+            tecJobPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    tvDocChooseJob.setSelected(false);
+                }
+            });
+        }
+        if (!tecJobPopupWindow.isShowing())
+            tvDocChooseJob.setSelected(true);
+        tecJobPopupWindow.show(tvDocChooseJob);
+    }
+
+    @Override
+    public void onDocJobListener(TecListBean tecListBean) {
+        tvDocChooseJob.setText(tecListBean.name);
+        tecId = tecListBean.tec_id;
+    }
+
+    @Override
+    public void docJobInfoSuccess(String result) {
+        // LogUtil.LogI("职称：" + result);
+        DocJobResponse response = Convert.fromJson(result, DocJobResponse.class);
+        List<TecListBean> tecList = response.data;
+        this.tecList = tecList;
+        if (tecList != null && !tecList.isEmpty()) {
+            showDocJobPopupWindow(tecList);
         }
     }
 
@@ -177,13 +234,9 @@ public class DocAddActivity extends BaseActivity<DocAddPresenter> implements Alb
     }
 
     @Override
-    public void docJobInfoSuccess(String result) {
-
-    }
-
-    @Override
     public void addDocResultSuccess(String result) {
-
+        ToastUtil.showMessage("加入平台成功！", Toast.LENGTH_LONG);
+        finish();
     }
 
     @Override

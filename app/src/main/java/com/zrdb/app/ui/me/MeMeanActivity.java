@@ -154,6 +154,7 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
         tvMeLaw.setOnClickListener(this);
         tvMeOrder.setOnClickListener(this);
         btnMeMeanExitApp.setOnClickListener(this);
+        tvAppUpdate.setOnClickListener(this);
     }
 
     @Override
@@ -173,6 +174,9 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
                                 .putExtra(ParamUtils.URL, ApiUtils.Config.COMMON_QUESTION_URL)
                                 .putExtra(ParamUtils.TITLE_NAME, "常见问题")
                         , SchemeActivity.class);
+                break;
+            case R.id.tvAppUpdate://版本更新
+                startIntentActivity(new Intent(), AppUpdateActivity.class);
                 break;
             case R.id.tvAboutMe://关于我们
                 startIntentActivity(new Intent()

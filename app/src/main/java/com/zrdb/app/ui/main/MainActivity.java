@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 break;
             case "医疗保险":
             case "专家会诊":
-                ToastUtil.showMessage("暂未开放~", Toast.LENGTH_SHORT);
+                ToastUtil.showMessage("暂未开放,敬请期待~", Toast.LENGTH_SHORT);
                 break;
         }
     }
