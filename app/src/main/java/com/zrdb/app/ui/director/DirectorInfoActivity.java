@@ -24,6 +24,7 @@ import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.DocDetailBean;
 import com.zrdb.app.ui.bean.LoginBean;
+import com.zrdb.app.ui.main.MessageOnLineActivity;
 import com.zrdb.app.ui.presenter.DirectorInfoPresenter;
 import com.zrdb.app.ui.response.DocResponse;
 import com.zrdb.app.ui.viewImpl.IDirectorInfoView;
@@ -121,6 +122,7 @@ public class DirectorInfoActivity extends BaseActivity<DirectorInfoPresenter> im
     @Override
     protected void initListener() {
         tvDocApply.setOnClickListener(this);
+        tvDocCustomService.setOnClickListener(this);
     }
 
     @Override
@@ -128,6 +130,9 @@ public class DirectorInfoActivity extends BaseActivity<DirectorInfoPresenter> im
         switch (v.getId()) {
             case R.id.tvDocApply://预约医生
                 startIntentActivity(new Intent().putExtra(ParamUtils.DOC_ID, docId), SubscribeDocActivity.class);
+                break;
+            case R.id.tvDocCustomService:
+                startIntentActivity(new Intent(), MessageOnLineActivity.class);
                 break;
         }
     }

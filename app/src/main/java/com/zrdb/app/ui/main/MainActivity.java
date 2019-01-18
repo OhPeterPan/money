@@ -239,8 +239,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             case "1"://未支付 去我的订单页面
                 startIntentActivity(new Intent(), MeOrderActivity.class);
                 break;
-            case "3"://已购买 去我的保障卡界面
-
+            case "2"://已购买 去我的保障卡界面
+                startIntentActivity(new Intent(), MeEnsureCardActivity.class);
                 break;
         }
     }

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:background="@color/eee">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_buy_card_back"
+                android:scaleType="centerCrop" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="25dp"
+                android:padding="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="@dimen/firstItemElevation"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvMeCardTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/standardTextColor"
+                            android:textSize="13sp"
+                            tools:text="医疗保障卡" />
+
+                        <TextView
+                            android:id="@+id/tvMeCardGroom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvMeCardTitle"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/shape_blue_rect"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp"
+                            android:text="精准推荐专家"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvMeCardEffect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvMeCardGroom"
+                            android:layout_marginTop="10dp"
+                            android:text="适 合 人 群 : 有就医困惑，需要专业人士推荐专家"
+                            android:textColor="@color/textHintColor"
+                            android:textSize="10sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_card_logo" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/eee" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp"
+                        android:text="注：服务期内可随时退款"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/shape_blue_back_rect"
+            android:drawablePadding="6dp"
+            android:padding="12dp"
+            android:text="服务包含"
+            android:textColor="@color/standardTextColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/eee" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/ivCardVipOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_vip_one" />
+
+            <TextView
+                android:id="@+id/tvCardVipOneTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@id/ivCardVipOne"
+                android:lineSpacingExtra="2dp"
+                android:text="专属医疗顾问，对症推荐名医"
+                android:textColor="@color/standardTextColor"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/tvCardVipOneDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardVipOneTitle"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/ivCardVipOne"
+                android:lineSpacingExtra="3dp"
+                android:text=""
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tvCardVipOneWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardVipOneDetail"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/ivCardVipOne"
+                android:lineSpacingExtra="2dp"
+                android:text="注：有1个月等待期，等待期过后，服务期启动。"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <ImageView
+                android:id="@+id/ivCardVipTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_vip_two" />
+
+            <TextView
+                android:id="@+id/tvCardVipTwoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@id/ivCardVipTwo"
+                android:lineSpacingExtra="2dp"
+                android:text="全站预约服务8折"
+                android:textColor="@color/standardTextColor"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvCardVipTwoDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardVipTwoTitle"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/ivCardVipTwo"
+                android:lineSpacingExtra="2dp"
+                android:text="医生预约、医院预约、智能就诊、可享受8折优惠"
+                android:textSize="11sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvCardVipThreeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_vip_three"
+            android:drawablePadding="6dp"
+            android:lineSpacingExtra="2dp"
+            android:paddingLeft="12dp"
+            android:text="开卡礼包"
+            android:textColor="@color/standardTextColor"
+            android:textSize="13sp" />
+    </LinearLayout>
+</ScrollView>

@@ -91,6 +91,10 @@
         <activity android:name=".ui.main.DocAddActivity" />
         <activity android:name=".ui.me.AppUpdateActivity" />
         <activity android:name=".ui.main.MessageOnLineActivity" />
+        <activity
+            android:name=".ui.main.MeEnsureCardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
 
     </application>
 

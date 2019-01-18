@@ -1,5 +1,6 @@
 package com.zrdb.app.ui.model.modelImpl;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.zrdb.app.netcallback.AppStringCallback;
@@ -36,9 +37,11 @@ public class OrderBuyModelImpl implements IOrderBuyModel {
                 .params("uid", uid)
                 .params("type", type)
                 .params("order_id", orderId)
+                .params("sys", "android")
                 .execute(new AppStringCallback(callback) {
                     @Override
                     public void onSuccess(Response<String> response) {
+                        LogUtils.iTag("pay", response.body());
                         callback.getPayInfo(response.body());
                     }
                 });

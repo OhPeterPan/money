@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.zrdb.app.ui.response.BaseResponse;
 import com.zrdb.app.util.Convert;
 import com.zrdb.app.util.SystemUtil;
@@ -30,21 +31,26 @@ public abstract class BasePresenter<T extends IView> {
         if (mView != null) {
             result = false;
             mView.hideLoading();
-            BaseResponse baseResponse = Convert.fromJson(message, BaseResponse.class);
-            if (baseResponse.code == 200) {
-                result = false;
+            if (!StringUtils.isEmpty(message)) {
+                BaseResponse baseResponse = Convert.fromJson(message, BaseResponse.class);
+                if (baseResponse.code == 200) {
+                    result = false;
+                } else {
+                    result = true;
+                    if (TextUtils.equals("用户验证错误", baseResponse.msg)) {//重新登录
+                        ToastUtil.showMessage(baseResponse.msg + ",请重新登录！", Toast.LENGTH_SHORT);
+                        if (mView instanceof AppCompatActivity) {
+                            SystemUtil.exitApp((Context) mView);
+                        } else if (mView instanceof Fragment) {
+                            SystemUtil.exitApp(((Fragment) mView).getActivity());
+                        }
+                    } else {
+                        ToastUtil.showMessage(baseResponse.msg, Toast.LENGTH_SHORT);
+                    }
+                }
             } else {
                 result = true;
-                if (TextUtils.equals("用户验证错误", baseResponse.msg)) {//重新登录
-                    ToastUtil.showMessage(baseResponse.msg + ",请重新登录！", Toast.LENGTH_SHORT);
-                    if (mView instanceof AppCompatActivity) {
-                        SystemUtil.exitApp((Context) mView);
-                    } else if (mView instanceof Fragment) {
-                        SystemUtil.exitApp(((Fragment) mView).getActivity());
-                    }
-                } else {
-                    ToastUtil.showMessage(baseResponse.msg, Toast.LENGTH_SHORT);
-                }
+                ToastUtil.showMessage("数据出错！", Toast.LENGTH_SHORT);
             }
         } else {
             result = true;
