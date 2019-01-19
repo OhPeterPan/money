@@ -204,10 +204,11 @@ public class OrderBuyActivity extends BaseActivity<OrderBuyPresenter> implements
     @Register
     private void payResult(String result) {
         if (TextUtils.equals("支付成功", result)) {
+            ToastUtil.showMessage("支付成功", Toast.LENGTH_LONG);
             setResult(0x002);
             finish();
         } else if (TextUtils.equals("支付失败", result)) {
-            ToastUtil.showMessage("支付失败", Toast.LENGTH_SHORT);
+            ToastUtil.showMessage("支付失败", Toast.LENGTH_LONG);
         }
     }
 
