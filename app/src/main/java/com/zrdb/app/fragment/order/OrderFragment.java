@@ -60,7 +60,6 @@ public class OrderFragment extends LazyFragment<OrderPresenter> implements IOrde
         sendNet();
     }
 
-
     private void sendNet() {
         setRefresh(true);
         innerRefresh();
@@ -68,7 +67,7 @@ public class OrderFragment extends LazyFragment<OrderPresenter> implements IOrde
 
     @Override
     protected void innerRefresh() {
-        LogUtil.LogI(account.uid);
+        LogUtil.LogI(account.uid + ":::" + status);
         presenter.sendNetGetOrder(account.token, account.uid, status);
     }
 

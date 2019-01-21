@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,6 +24,7 @@ import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.UserIndexBean;
 import com.zrdb.app.ui.bean.UserInfoBean;
 import com.zrdb.app.ui.common.SchemeActivity;
+import com.zrdb.app.ui.main.MessageActivity;
 import com.zrdb.app.ui.presenter.MeMeanPresenter;
 import com.zrdb.app.ui.response.UserResponse;
 import com.zrdb.app.ui.viewImpl.IMeMeanModelView;
@@ -77,6 +79,8 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
     TextView tvCacheNumber;
     @BindView(R.id.llClearCache)
     LinearLayout llClearCache;
+    @BindView(R.id.llMeMessageTop)
+    LinearLayout llMeMessageTop;
     @BindView(R.id.tvMeLaw)
     TextView tvMeLaw;
     @BindView(R.id.cbAutoUpdate)
@@ -101,7 +105,9 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
     protected void initData() {
         account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         initToolbar();
-        badgeView = new QBadgeView(this).bindTarget(rlMeMessage);
+        badgeView = new QBadgeView(this).bindTarget(llMeMessageTop);
+        badgeView.setBadgeGravity(Gravity.END | Gravity.TOP);
+        badgeView.setBadgeTextSize(8, true);
         sendNet();
     }
 
@@ -155,6 +161,7 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
         tvMeOrder.setOnClickListener(this);
         btnMeMeanExitApp.setOnClickListener(this);
         tvAppUpdate.setOnClickListener(this);
+        ivMeMessage.setOnClickListener(this);
     }
 
     @Override
@@ -195,6 +202,9 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
                 break;
             case R.id.btnMeMeanExitApp:
                 showExitAppDialog();
+                break;
+            case R.id.ivMeMessage://消息
+                startIntentActivity(new Intent(), MessageActivity.class);
                 break;
         }
     }
@@ -244,6 +254,7 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
         UserIndexBean userIndexBean = response.data;
         UserInfoBean userInfo = userIndexBean.userinfo;
         badgeView.setBadgeNumber(userIndexBean.message_count);
+        //badgeView.setBadgeNumber(20);
         tvMePersonName.setText(TextUtils.isEmpty(userInfo.username) ? "" : userInfo.username);
         tvMePersonPhone.setText(InfoUtil.getNumber(userInfo.phone));
         if (!StringUtils.isEmpty(userInfo.thumb)) {
