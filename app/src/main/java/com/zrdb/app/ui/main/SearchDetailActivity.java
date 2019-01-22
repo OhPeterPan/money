@@ -32,6 +32,8 @@ import butterknife.BindView;
 
 public class SearchDetailActivity extends BaseActivity implements TextView.OnEditorActionListener {
 
+    @BindView(R.id.tvActTitle)
+    TextView tvActTitle;
     @BindView(R.id.tvActRightTitle)
     TextView tvActRightTitle;
     @BindView(R.id.ivToolbarRight)
@@ -62,6 +64,8 @@ public class SearchDetailActivity extends BaseActivity implements TextView.OnEdi
     @Override
     protected void initData() {
         setBackVisibility(View.VISIBLE);
+        tvActTitle.setText("搜索结果");
+        tvActTitle.setVisibility(View.VISIBLE);
         ivToolbarRight.setVisibility(View.VISIBLE);
         keyword = getIntent().getStringExtra(ParamUtils.KEYWORD);
         etSearchDetail.setHint(keyword);

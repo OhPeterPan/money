@@ -30,6 +30,7 @@ import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.MultipleDocBean;
 import com.zrdb.app.ui.bean.ProvinceBean;
 import com.zrdb.app.ui.bean.TecListBean;
+import com.zrdb.app.ui.director.DirectorInfoActivity;
 import com.zrdb.app.ui.presenter.SearchDocPresenter;
 import com.zrdb.app.ui.response.DocFilterResponse;
 import com.zrdb.app.ui.response.SearchDocResponse;
@@ -44,7 +45,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class DocFragment extends LazyFragment<SearchDocPresenter> implements View.OnClickListener, ISearchDocView, BaseQuickAdapter.RequestLoadMoreListener, AddressPopupWindow.OnChooseAddressListener, DocFilterPopupWindow.OnChooseFilterInfoListener {
+public class DocFragment extends LazyFragment<SearchDocPresenter> implements View.OnClickListener, ISearchDocView, BaseQuickAdapter.RequestLoadMoreListener, AddressPopupWindow.OnChooseAddressListener, DocFilterPopupWindow.OnChooseFilterInfoListener, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.tvFragDocAddress)
     TextView tvFragDocAddress;
@@ -129,6 +130,16 @@ public class DocFragment extends LazyFragment<SearchDocPresenter> implements Vie
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter ada, View view, int position) {
+        MultipleDocBean docBean = adapter.getItem(position);
+        if (docBean == null) return;
+        startActivity(new Intent()
+                .putExtra(ParamUtils.SEC_NAME, docBean.sec_name)
+                .putExtra(ParamUtils.DOC_ID, docBean.doc_id).setClass(getActivity(), DirectorInfoActivity.class));
     }
 
     private void initListener() {
@@ -323,4 +334,6 @@ public class DocFragment extends LazyFragment<SearchDocPresenter> implements Vie
         fragment.setArguments(bundle);
         return fragment;
     }
+
+
 }

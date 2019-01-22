@@ -25,4 +25,20 @@ public class MeMeanModelImpl implements IMeMeanModel {
                     }
                 });
     }
+
+    @Override
+    public void sendNetCardState(String token, String uid, final IMeMeanCallback callback) {
+        String url = ApiUtils.Config.getDimen() + ApiUtils.ENSURE_STATE_URL + EncryptUtil.getMD5("Cardstatus"
+                + TimeUtil.date2String(TimeUtil.getNowDate(), TimeUtil.YEAR_MONTH_DAY)
+                + ApiUtils.clientSecret);
+        OkGo.<String>post(url)
+                .params("token", token)
+                .params("uid", uid)
+                .execute(new AppStringCallback(callback) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        callback.getCardState(response.body());
+                    }
+                });
+    }
 }

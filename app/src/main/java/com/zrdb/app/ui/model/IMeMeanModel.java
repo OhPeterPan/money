@@ -4,4 +4,6 @@ import com.zrdb.app.ui.callback.IMeMeanCallback;
 
 public interface IMeMeanModel {
     void sendNetPersonInfo(String token, String uid, IMeMeanCallback callback);
+
+    void sendNetCardState(String token, String uid, IMeMeanCallback callback);
 }

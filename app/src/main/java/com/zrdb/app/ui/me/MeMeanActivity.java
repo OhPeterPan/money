@@ -23,9 +23,13 @@ import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.UserIndexBean;
 import com.zrdb.app.ui.bean.UserInfoBean;
+import com.zrdb.app.ui.card.CardExhibitionActivity;
 import com.zrdb.app.ui.common.SchemeActivity;
+import com.zrdb.app.ui.main.MeEnsureCardActivity;
 import com.zrdb.app.ui.main.MessageActivity;
+import com.zrdb.app.ui.main.MessageOnLineActivity;
 import com.zrdb.app.ui.presenter.MeMeanPresenter;
+import com.zrdb.app.ui.response.StrResponse;
 import com.zrdb.app.ui.response.UserResponse;
 import com.zrdb.app.ui.viewImpl.IMeMeanModelView;
 import com.zrdb.app.util.ApiUtils;
@@ -162,6 +166,8 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
         btnMeMeanExitApp.setOnClickListener(this);
         tvAppUpdate.setOnClickListener(this);
         ivMeMessage.setOnClickListener(this);
+        tvMeContactService.setOnClickListener(this);
+        tvMeDocCard.setOnClickListener(this);
     }
 
     @Override
@@ -205,6 +211,30 @@ public class MeMeanActivity extends BaseActivity<MeMeanPresenter> implements IMe
                 break;
             case R.id.ivMeMessage://消息
                 startIntentActivity(new Intent(), MessageActivity.class);
+                break;
+            case R.id.tvMeContactService://联系客服
+                startIntentActivity(new Intent(), MessageOnLineActivity.class);
+                break;
+            case R.id.tvMeDocCard://我的保障卡
+                presenter.sendNetCardState(account.token, account.uid);
+                break;
+        }
+    }
+
+    @Override
+    public void getCardStateSuccess(String result) {
+        StrResponse response = Convert.fromJson(result, StrResponse.class);
+        String state = response.data;
+        switch (state) {
+            case "0"://没有购买
+                //startIntentActivity(new Intent(), BuyCardActivity.class);
+                startIntentActivity(new Intent(), CardExhibitionActivity.class);
+                break;
+            case "1"://未支付 去我的订单页面
+                startIntentActivity(new Intent(), MeOrderActivity.class);
+                break;
+            case "2"://已购买 去我的保障卡界面
+                startIntentActivity(new Intent(), MeEnsureCardActivity.class);
                 break;
         }
     }

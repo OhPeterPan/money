@@ -14,6 +14,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.zrdb.app.R;
@@ -29,13 +30,13 @@ import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.MultipleDocBean;
 import com.zrdb.app.ui.bean.SecListBean;
 import com.zrdb.app.ui.bean.TecListBean;
+import com.zrdb.app.ui.director.DirectorInfoActivity;
 import com.zrdb.app.ui.presenter.HosDetailPresenter;
 import com.zrdb.app.ui.response.DocDetailResponse;
 import com.zrdb.app.ui.response.SearchDocResponse;
 import com.zrdb.app.ui.viewImpl.IHosDetailView;
 import com.zrdb.app.util.ApiUtils;
 import com.zrdb.app.util.Convert;
-import com.zrdb.app.util.LogUtil;
 import com.zrdb.app.util.ParamUtils;
 import com.zrdb.app.util.SpUtil;
 import com.zrdb.app.util.ToastUtil;
@@ -148,6 +149,10 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {//去医生详情
         //ToastUtil.showMessage("可以吗", Toast.LENGTH_SHORT);
+        MultipleDocBean bean = (MultipleDocBean) adapter.getItem(position);
+        if (bean == null) return;
+        startIntentActivity(new Intent().putExtra(ParamUtils.SEC_NAME, bean.sec_name).putExtra(ParamUtils.DOC_ID, bean.doc_id), DirectorInfoActivity.class);
+        //DirectorInfoActivity
     }
 
     private void sendNetHosDetail() {
@@ -156,7 +161,7 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
 
     @Override
     public void getHosDetailSuccess(String result) {
-        LogUtil.logResult("医院详情", result);
+        // LogUtil.logResult("医院详情", result);
         initAdapter();
         //initHeadView();
         DocDetailResponse response = Convert.fromJson(result, DocDetailResponse.class);
@@ -185,7 +190,8 @@ public class HosDetailActivity extends BaseActivity<HosDetailPresenter> implemen
 
     @Override
     public void getHosDocResultSuccess(String result) {
-        LogUtil.logResult("医生", result);
+        // LogUtil.LogI("医生: " + result);
+        LogUtils.iTag("wak", result);
         initPage(result);
     }
 

@@ -18,10 +18,24 @@ public class MeMeanPresenter extends BasePresenter<IMeMeanModelView> implements 
         if (model != null) model.sendNetPersonInfo(token, uid, this);
     }
 
+    public void sendNetCardState(String token, String uid) {
+        if (mView != null)
+            mView.showLoading();
+        if (model != null)
+            model.sendNetCardState(token, uid, this);
+    }
+
     @Override
     public void getMeInfo(String result) {
         if (!checkResultError(result)) {
             mView.getMeInfoSuccess(result);
+        }
+    }
+
+    @Override
+    public void getCardState(String result) {
+        if (!checkResultError(result)) {
+            mView.getCardStateSuccess(result);
         }
     }
 }

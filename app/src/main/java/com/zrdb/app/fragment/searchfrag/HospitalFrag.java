@@ -28,6 +28,7 @@ import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.MultipleHosBean;
 import com.zrdb.app.ui.bean.ProvinceBean;
 import com.zrdb.app.ui.bean.TecListBean;
+import com.zrdb.app.ui.hospital.HosDetailActivity;
 import com.zrdb.app.ui.presenter.SearchHosPresenter;
 import com.zrdb.app.ui.response.DocFilterResponse;
 import com.zrdb.app.ui.response.SearchHosResponse;
@@ -44,7 +45,7 @@ import butterknife.BindView;
 
 public class HospitalFrag extends LazyFragment<SearchHosPresenter> implements ISearchHosView,
         BaseQuickAdapter.RequestLoadMoreListener, View.OnClickListener,
-        AddressPopupWindow.OnChooseAddressListener, DocFilterPopupWindow.OnChooseFilterInfoListener {
+        AddressPopupWindow.OnChooseAddressListener, DocFilterPopupWindow.OnChooseFilterInfoListener, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.tvFragHosAddress)
     TextView tvFragHosAddress;
@@ -213,6 +214,15 @@ public class HospitalFrag extends LazyFragment<SearchHosPresenter> implements IS
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter ada, View view, int position) {
+        MultipleHosBean hosBean = adapter.getItem(position);
+        if (hosBean == null) return;
+        startActivity(new Intent()
+                .putExtra(ParamUtils.HOS_ID, hosBean.hos_id).setClass(getActivity(), HosDetailActivity.class));
     }
 
     private void sendNet(boolean showDialog) {
@@ -322,4 +332,6 @@ public class HospitalFrag extends LazyFragment<SearchHosPresenter> implements IS
     public void onLoadMoreRequested() {
         presenter.sendNetHosInfo(account.token, account.uid, keyword, cityId, cateId, page, row, false);
     }
+
+
 }

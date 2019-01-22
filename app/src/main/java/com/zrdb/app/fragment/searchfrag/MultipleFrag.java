@@ -16,6 +16,8 @@ import com.zrdb.app.ui.bean.MultipleBean;
 import com.zrdb.app.ui.bean.MultipleDocBean;
 import com.zrdb.app.ui.bean.MultipleHosBean;
 import com.zrdb.app.ui.bean.MultipleTypeBean;
+import com.zrdb.app.ui.director.DirectorInfoActivity;
+import com.zrdb.app.ui.hospital.HosDetailActivity;
 import com.zrdb.app.ui.presenter.MultipleResultPresenter;
 import com.zrdb.app.ui.response.MultipleResponse;
 import com.zrdb.app.ui.viewImpl.IMultipleResultView;
@@ -29,7 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implements IMultipleResultView, BaseQuickAdapter.OnItemChildClickListener {
+public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implements IMultipleResultView, BaseQuickAdapter.OnItemChildClickListener, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -82,11 +84,13 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         adapter.setOnItemChildClickListener(this);
+        adapter.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemChildClick(BaseQuickAdapter ada, View v, int position) {
         MultipleTypeBean typeBean = adapter.getItem(position);
+        if (typeBean == null) return;
         if (listener == null) return;
         switch (typeBean.name) {
             case "相关医生":
@@ -95,6 +99,21 @@ public class MultipleFrag extends LazyFragment<MultipleResultPresenter> implemen
             case "相关医院":
                 listener.pagePos(2);
                 break;
+        }
+
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter ada, View view, int position) {
+        MultipleTypeBean typeBean = adapter.getItem(position);
+        if (typeBean == null) return;
+        if (typeBean.type == 1) {//医生详情
+            startActivity(new Intent()
+                    .putExtra(ParamUtils.SEC_NAME, typeBean.doc.sec_name)
+                    .putExtra(ParamUtils.DOC_ID, typeBean.doc.doc_id).setClass(getActivity(), DirectorInfoActivity.class));
+        } else if (typeBean.type == 2) {//医院详情
+            startActivity(new Intent()
+                    .putExtra(ParamUtils.HOS_ID, typeBean.hos.hos_id).setClass(getActivity(), HosDetailActivity.class));
         }
     }
 
