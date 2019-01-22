@@ -25,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_brspoke_be_hospitalized"
                 android:drawablePadding="6dp"
-                android:text="住院治疗"
+                android:gravity="center"
+                android:text="到院治疗"
                 android:textColor="@color/standardTextColor"
                 android:textSize="13sp" />
 
@@ -36,6 +37,7 @@
                 android:layout_marginLeft="12dp"
                 android:drawableLeft="@drawable/ic_bespoke_money_pic"
                 android:drawablePadding="6dp"
+                android:gravity="center"
                 android:text="100 元"
                 android:textColor="@color/darkTextYellow"
                 android:textSize="13sp" />
