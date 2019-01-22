@@ -1,6 +1,8 @@
 package com.zrdb.app.ui.main;
 
+import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ import com.zrdb.app.banner.BannerImpl;
 import com.zrdb.app.banner.IBanner;
 import com.zrdb.app.decorate.MainGridDecorate;
 import com.zrdb.app.image_loader.ImageLoader;
+import com.zrdb.app.permission.PermissionManager;
 import com.zrdb.app.test.TestActivity;
 import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.IndexBean;
@@ -76,6 +79,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     private LinearLayout llMainLookDirector;
     private LinearLayout llMainMeMean;
     private LinearLayout llMessageOnLine;
+    private LinearLayout llHeadMainPhone;
 
     @Override
     protected void initStatusBar() {
@@ -116,6 +120,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         llMainLookDirector = headView.findViewById(R.id.llMainLookDirector);
         llMainMeMean = headView.findViewById(R.id.llMainMeMean);
         llMessageOnLine = headView.findViewById(R.id.llMessageOnLine);
+        llHeadMainPhone = headView.findViewById(R.id.llHeadMainPhone);
         banner = headView.findViewById(R.id.banner);
         initFollowAdapter();
         llMainHeadIntelligentVisit.setOnClickListener(this);
@@ -123,6 +128,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         llMainLookHos.setOnClickListener(this);
         llMainMeMean.setOnClickListener(this);
         llMessageOnLine.setOnClickListener(this);
+        llHeadMainPhone.setOnClickListener(this);
     }
 
     private void initFollowAdapter() {
@@ -204,7 +210,23 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             case R.id.llMessageOnLine://在线咨询
                 startIntentActivity(new Intent(), MessageOnLineActivity.class);
                 break;
+            case R.id.llHeadMainPhone://预约热线
+                callPhone();
+                break;
         }
+    }
+
+    private void callPhone() {
+        PermissionManager.getInstance().requestPermission(new Runnable() {
+            @Override
+            public void run() {
+                String phoneNum = "4006669673";
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri data = Uri.parse("tel:" + phoneNum);
+                intent.setData(data);
+                startActivity(intent);
+            }
+        }, Manifest.permission.CALL_PHONE);
     }
 
     @Override
