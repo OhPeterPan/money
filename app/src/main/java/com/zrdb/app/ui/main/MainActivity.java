@@ -64,8 +64,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @BindView(R.id.tvMainSearch)
     TextView tvMainSearch;
 
-    @BindView(R.id.tvMainService)
-    TextView tvMainService;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private LoginBean account;
@@ -80,6 +78,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     private LinearLayout llMainMeMean;
     private LinearLayout llMessageOnLine;
     private LinearLayout llHeadMainPhone;
+    private View footView;
 
     @Override
     protected void initStatusBar() {
@@ -105,8 +104,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         account = (LoginBean) SpUtil.get(SpUtil.ACCOUNT, LoginBean.class);
         initAdapter();
         initHeadView();
+        initFootView();
         sendNet();
     }
+
 
     private void sendNet() {
         presenter.sendNet(account.token, account.uid);
@@ -131,6 +132,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         llHeadMainPhone.setOnClickListener(this);
     }
 
+    private void initFootView() {
+        footView = LayoutInflater.from(this).inflate(R.layout.view_main_foot, recyclerView, false);
+    }
+
     private void initFollowAdapter() {
         followUpAdapter = new FollowUpAdapter();
         horizontalRecyclerView.setHasFixedSize(true);
@@ -153,7 +158,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.addItemDecoration(new MainGridDecorate());
-        adapter.setHeaderAndEmpty(true);
+        adapter.setHeaderFooterEmpty(true, true);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
     }
@@ -238,10 +243,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             List<IndexListBean> topSlider = indexBean.top_slider;
             adapter.setNewData(indexBean.bottom_slider);
             followUpAdapter.setNewData(indexBean.middle_slider);
-            tvMainService.setVisibility(View.VISIBLE);
             setBanner(topSlider);
             if (adapter.getHeaderLayoutCount() == 0) {
                 adapter.addHeaderView(headView);
+            }
+
+            if (adapter.getFooterLayoutCount() == 0) {
+                adapter.addFooterView(footView);
             }
         } else {
             ToastUtil.showMessage(String.valueOf(mainResponse.msg), Toast.LENGTH_SHORT);

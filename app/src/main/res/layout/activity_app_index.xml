@@ -4,19 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvMainService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#f5f1f0"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/main_bottom_service"
-        android:textColor="#989999"
-        android:textSize="12sp"
-        android:visibility="gone" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@id/recyclerView"
         android:layout_width="match_parent"
@@ -45,6 +32,7 @@
             android:layout_marginRight="3dp"
             android:layout_toLeftOf="@id/ivMainMessage"
             android:padding="6dp"
+            android:visibility="invisible"
             android:src="@drawable/ic_share" />
 
         <com.zrdb.app.custom_view.CenterTextView
@@ -58,7 +46,7 @@
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="6dp"
             android:padding="6dp"
-            android:text="孕期体温计"
+            android:text="找医生，医院或疾病"
             android:textColor="#616161"
             android:textSize="13sp" />
     </RelativeLayout>

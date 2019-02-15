@@ -68,7 +68,7 @@ public class SearchDetailActivity extends BaseActivity implements TextView.OnEdi
         tvActTitle.setVisibility(View.VISIBLE);
         ivToolbarRight.setVisibility(View.VISIBLE);
         keyword = getIntent().getStringExtra(ParamUtils.KEYWORD);
-        etSearchDetail.setHint(keyword);
+       // etSearchDetail.setHint(keyword);
         initTabLayout();
     }
 
