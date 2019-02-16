@@ -8,6 +8,7 @@ import com.zrdb.app.ui.callback.IOrderBuyCallback;
 import com.zrdb.app.ui.model.IOrderBuyModel;
 import com.zrdb.app.util.ApiUtils;
 import com.zrdb.app.util.EncryptUtil;
+import com.zrdb.app.util.LogUtil;
 import com.zrdb.app.util.TimeUtil;
 
 public class OrderBuyModelImpl implements IOrderBuyModel {
@@ -16,6 +17,7 @@ public class OrderBuyModelImpl implements IOrderBuyModel {
         String url = ApiUtils.Config.getDimen() + ApiUtils.PAY_ENSURE_INFO_URL + EncryptUtil.getMD5("Paycard_pay"
                 + TimeUtil.date2String(TimeUtil.getNowDate(), TimeUtil.YEAR_MONTH_DAY)
                 + ApiUtils.clientSecret);
+        LogUtil.LogI("url:" + url);
         OkGo.<String>post(url)
                 .params("token", token)
                 .params("uid", uid)

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.StringUtils;
 import com.zrdb.app.R;
 import com.zrdb.app.image_loader.ImageLoader;
 import com.zrdb.app.rxbus.RxBus;
@@ -109,10 +108,10 @@ public class SubscribeDocActivity extends BaseActivity<SubscribeDocPresenter> im
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if (!StringUtils.isEmpty(s))
+         /*       if (!StringUtils.isEmpty(s))
                     tvSubDocPhone.setText(String.format("医生助理会联系您的手机：%s", String.valueOf(s.toString())));
                 else
-                    tvSubDocPhone.setText("");
+                    tvSubDocPhone.setText("");*/
             }
         });
     }

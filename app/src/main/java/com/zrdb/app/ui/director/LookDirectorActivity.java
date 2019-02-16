@@ -3,7 +3,6 @@ package com.zrdb.app.ui.director;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +11,7 @@ import com.zrdb.app.R;
 import com.zrdb.app.annotation.Register;
 import com.zrdb.app.rxbus.RxBus;
 import com.zrdb.app.ui.BaseActivity;
+import com.zrdb.app.ui.main.SearchActivity;
 import com.zrdb.app.util.ParamUtils;
 
 import butterknife.BindView;
@@ -28,7 +28,7 @@ public class LookDirectorActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.etDirectorSearch)
-    EditText etDirectorSearch;
+    TextView etDirectorSearch;
     @BindView(R.id.tvLookDocMedicine)
     TextView tvLookDocMedicine;
     @BindView(R.id.tvLookDocSurgery)
@@ -94,6 +94,7 @@ public class LookDirectorActivity extends BaseActivity {
         tvLookDocOrthopaedics.setOnClickListener(this);
         tvLookDocDepartment.setOnClickListener(this);
         tvLookDocExtra.setOnClickListener(this);
+        etDirectorSearch.setOnClickListener(this);
     }
 
     @Override
@@ -122,6 +123,9 @@ public class LookDirectorActivity extends BaseActivity {
                 break;
             case R.id.tvLookDocExtra://其它
                 startDirectorDetail("8", "其它");
+                break;
+            case R.id.etDirectorSearch://搜索
+                startIntentActivity(new Intent(), SearchActivity.class);
                 break;
         }
     }

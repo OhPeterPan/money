@@ -296,9 +296,9 @@
                         android:layout_height="wrap_content"
                         android:minHeight="120dp"
                         android:paddingTop="6dp"
-                        android:textColor="#a1a1a1"
-                        android:textSize="11sp"
-                        tools:text="医生助理会联系您的手机：" />
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:text="提交申请，客服将在24小时内与您联系" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -312,6 +312,7 @@
                             android:id="@+id/cbSubHosServiceScheme"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:text="您已同意"
                             android:textColor="#959394"
                             android:textSize="13sp" />

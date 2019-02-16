@@ -23,6 +23,7 @@ import com.zrdb.app.ui.bean.LevelListBean;
 import com.zrdb.app.ui.bean.LoginBean;
 import com.zrdb.app.ui.bean.MultipleHosBean;
 import com.zrdb.app.ui.bean.ProvinceBean;
+import com.zrdb.app.ui.main.SearchActivity;
 import com.zrdb.app.ui.presenter.LookHosIndexPresenter;
 import com.zrdb.app.ui.response.DocFilterResponse;
 import com.zrdb.app.ui.response.SearchHosResponse;
@@ -202,6 +203,7 @@ public class LookHosIndexActivity extends BaseActivity<LookHosIndexPresenter> im
     protected void initListener() {
         llHosAddress.setOnClickListener(this);
         llHosLev.setOnClickListener(this);
+        tvHosSearch.setOnClickListener(this);
     }
 
     @Override
@@ -222,6 +224,9 @@ public class LookHosIndexActivity extends BaseActivity<LookHosIndexPresenter> im
                 } else {
                     showFilterPopupWindow();
                 }
+                break;
+            case R.id.tvHosSearch:
+                startIntentActivity(new Intent(), SearchActivity.class);
                 break;
         }
     }

@@ -32,7 +32,7 @@ import com.zrdb.app.ui.BaseActivity;
 import com.zrdb.app.ui.bean.IndexBean;
 import com.zrdb.app.ui.bean.IndexListBean;
 import com.zrdb.app.ui.bean.LoginBean;
-import com.zrdb.app.ui.card.CardExhibitionActivity;
+import com.zrdb.app.ui.card.BuyCardActivity;
 import com.zrdb.app.ui.common.SchemeActivity;
 import com.zrdb.app.ui.director.LookDirectorActivity;
 import com.zrdb.app.ui.hospital.LookHosIndexActivity;
@@ -263,8 +263,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         String state = response.data;
         switch (state) {
             case "0"://没有购买
-                //startIntentActivity(new Intent(), BuyCardActivity.class);
-                startIntentActivity(new Intent(), CardExhibitionActivity.class);
+                startIntentActivity(new Intent(), BuyCardActivity.class);
+                // startIntentActivity(new Intent(), CardExhibitionActivity.class);
                 break;
             case "1"://未支付 去我的订单页面
                 startIntentActivity(new Intent(), MeOrderActivity.class);
