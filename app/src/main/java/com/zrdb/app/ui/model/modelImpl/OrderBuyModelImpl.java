@@ -21,6 +21,7 @@ public class OrderBuyModelImpl implements IOrderBuyModel {
         OkGo.<String>post(url)
                 .params("token", token)
                 .params("uid", uid)
+                .params("sys", "android")
                 .execute(new AppStringCallback(callback) {
                     @Override
                     public void onSuccess(Response<String> response) {

@@ -48,7 +48,7 @@ public class ApiUtils {
     public static final String ME_ENSURE_CARD_URL = "Card/mycard?client_id=" + clientId + "&client_token=";
 
     public static class Config {
-        public static final boolean DEBUG = true;
+        public static final boolean DEBUG = false;
         public static final String WX_APP_ID = "wxe6fde7f9414981b9";//wxdcc11589d1797b1e
         public static final String WX_APP_SECRET = "5f02238239719ceea9e3006d48912b15";
         private static final String DEBUG_URL = "http://zrdb.vipwfx.cn/api.php/";
